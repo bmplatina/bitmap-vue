@@ -1,0 +1,22 @@
+<!DOCTYPE html> // 문서 유형 html로 지정
+<html lang="ko"> // 문서를 html로 시작, 언어를 "ko"로 지정
+    <head> // 브라우저 정보 지정
+        <meta> // 메타데이터
+        <title>Bitmap</title> // 페이지 제목
+    </head>
+    <body>
+        // 문서 내용
+        <!-- 주석 -->
+        <header> // 헤더 영역, 페이지 제목 부분 등
+        <article> // 독립적 컨텐츠
+        <section> // 컨텐츠 영역
+        <div> // 여러 컨텐츠 묶기
+        <h1> <h2> ... // 제목
+        <p> // 단락
+        <blockquote> // 인용문, 들여쓰기 적용
+        <strong> // 볼드체
+        <em> 또는 <i> // 이탤릭
+        <u> // 밑줄
+        <s> // 취소선
+    </body>
+</html>
