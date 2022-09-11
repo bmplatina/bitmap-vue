@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Hello from "./components/Hello.vue";
 import { ipcRenderer } from "./electron";
+import Hello from "./components/Hello.vue";
 import Menubar from "./components/Menubar.vue";
 import Sidebar from "./components/Sidebar.vue";
 
