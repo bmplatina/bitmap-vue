@@ -35,6 +35,11 @@ function createWindow() {
         minWidth: 1000,
         minHeight: 700,
         fullscreenable: true,
+        titleBarStyle: "hiddenInset",
+        titleBarOverlay: {
+            color: "#2f3241",
+            symbolColor: "#74b1be",
+        },
         webPreferences: {
             preload: (0, path_1.join)(__dirname, "preload.js"),
             nodeIntegration: true,

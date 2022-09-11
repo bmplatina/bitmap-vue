@@ -93,7 +93,7 @@
 <style scoped>
 .sidebar {
   position: fixed;
-  margin-top: 42px;
+  margin-top: 28px;
   top: 0;
   left: 0;
   height: 100%;
@@ -260,6 +260,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
+  margin-bottom: 25px;
 }
 
 .sidebar .profile_content .profile {

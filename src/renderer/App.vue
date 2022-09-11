@@ -9,7 +9,7 @@ ipcRenderer.send("message", "Hello from App.vue!");
 
 <template>
   <div id="app">
-    <Menubar />
+    <!-- <Menubar /> -->
     <Sidebar />
     <Hello />
   </div>
@@ -28,6 +28,7 @@ ipcRenderer.send("message", "Hello from App.vue!");
     "NanumBarunGothic", "Nanum Gothic", "KoPub Dotum", "Malgun Gothic",
     "맑은 고딕", sans-serif;
   -webkit-user-select: none;
+  -webkit-app-region: no-drag;
 }
 
 @media (prefers-color-scheme: dark) {
