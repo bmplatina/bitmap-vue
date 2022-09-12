@@ -11,7 +11,9 @@ import { join } from "path";
 import * as os from "os";
 import * as fs from "fs";
 import * as isDev from "electron-is-dev";
+import * as log from "electron-log";
 import * as remote from "@electron/remote/main";
+import { makeUniversalApp } from "@electron/universal";
 
 const isMac = process.platform === "darwin";
 remote.initialize();
