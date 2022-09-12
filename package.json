@@ -1,5 +1,5 @@
 {
-  "name": "bitmap",
+  "name": "bitmap-electron-esd",
   "productName": "Bitmap",
   "license": "MIT",
   "version": "0.1.2",
@@ -16,6 +16,13 @@
   "author": {
     "name": "Platina",
     "url": "http://prodbybitmap.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bmplatina/bitmap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bmplatina/bitmap/issues"
   },
   "devDependencies": {
     "@electron/universal": "^1.3.0",

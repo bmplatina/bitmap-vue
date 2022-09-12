@@ -20,7 +20,7 @@
       </li>
       <li></li>
       <li>
-        <a href="http://prodbybitmap.com/">
+        <a href="http://prodbybitmap.com/" target="_blank">
           <i class="bx bx-book-open"></i>
           <span class="links_name">Wiki</span>
         </a>
@@ -93,7 +93,7 @@
 <style scoped>
 .sidebar {
   position: fixed;
-  margin-top: 28px;
+  margin-top: 37px;
   top: 0;
   left: 0;
   height: 100%;
@@ -260,7 +260,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: 40px;
 }
 
 .sidebar .profile_content .profile {
