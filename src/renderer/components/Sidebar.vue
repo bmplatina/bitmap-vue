@@ -1,17 +1,22 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="sidebar">
+  <div class="sidebar" :class="{ active: isActive }">
     <div class="logo_content">
       <div class="logo">
         <div class="logo_name">Bitmap</div>
       </div>
+      <button
+        id="showHideMenus"
+        class="toggleButtons"
+        @click="isActive = !isActive"
+      >
+        <i class="bx bx-menu" id="btn"></i>
+      </button>
       <!-- Here -->
     </div>
     <ul class="nav_list">
       <li>
         <a href="#">
-          <i class="bx bx-search"></i>
+          <i class="bx bx-search" @click="isActive = !isActive"></i>
           <form action="http://prodbybitmap.com/w/index.php" method="GET">
             <input type="search" placeholder="Search..." />
           </form>
@@ -19,61 +24,12 @@
         <span class="tooltip">Search</span>
       </li>
       <li></li>
-      <li>
-        <a href="http://prodbybitmap.com/" target="_blank">
-          <i class="bx bx-book-open"></i>
-          <span class="links_name">Wiki</span>
+      <li v-for="(menuElements, index) in menu" :key="index">
+        <a href="#" target="_blank">
+          <i class="{menuLogo[index]: true}"></i>
+          <span class="links_name">{{ menu[index] }}</span>
         </a>
-        <span class="tooltip">Bitmap Wiki</span>
-      </li>
-      <li>
-        <a href="http://prodbybitmap.com/">
-          <i class="bx bx-news"></i>
-          <span class="links_name">Newsroom</span>
-        </a>
-        <span class="tooltip">Newsroom</span>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-chat"></i>
-          <span class="links_name">Blog</span>
-        </a>
-        <span class="tooltip">Blog</span>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-folder"></i>
-          <span class="links_name">Project Files</span>
-        </a>
-        <span class="tooltip">Project Files</span>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-game"></i>
-          <span class="links_name">Games</span>
-        </a>
-        <span class="tooltip">Games</span>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-cloud-download"></i>
-          <span class="links_name">Library</span>
-        </a>
-        <span class="tooltip">Library</span>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-user-circle"></i>
-          <span class="links_name">Users</span>
-        </a>
-        <span class="tooltip">Users</span>
-      </li>
-      <li>
-        <a href="#">
-          <i class="bx bx-cog"></i>
-          <span class="links_name">Settings</span>
-        </a>
-        <span class="tooltip">Settings</span>
+        <span class="tooltip">{{ menu[index] }}</span>
       </li>
     </ul>
     <div class="profile_content">
@@ -81,8 +37,8 @@
         <div class="profile_details">
           <!-- <img src="" alt=""> -->
           <div class="name_job">
-            <div class="name">Platina</div>
-            <div class="name">Admin of Bitmap</div>
+            <div class="name">{{ user.name }}</div>
+            <div class="name">{{ user.description }}</div>
           </div>
         </div>
         <i class="bx bx-log-out" id="log_out"></i>
@@ -90,7 +46,44 @@
     </div>
   </div>
 </template>
-<style scoped>
+
+<script defer lang="ts">
+export default {
+  name: "SideBar",
+  data() {
+    return {
+      isActive: false,
+      menu: [
+        "Wiki",
+        "Newsroom",
+        "Blog",
+        "Project Files",
+        "Games",
+        "Library",
+        "Users",
+        "Settings",
+      ],
+      menuLogo: [
+        "bx bx-book-open",
+        "bx bx-news",
+        "bx bx-chat",
+        "bx bx-folder",
+        "bx bx-game",
+        "bx bx-cloud-download",
+        "bx bx-user-circle",
+        "bx bx-cog",
+      ],
+      user: {
+        name: "Platina",
+        description: "Leader of Bitmap",
+      },
+    };
+  },
+  components: {},
+};
+</script>
+
+<style scoped lang="css">
 .sidebar {
   position: fixed;
   margin-top: 37px;

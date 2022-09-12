@@ -11,7 +11,9 @@ ipcRenderer.send("message", "Hello from App.vue!");
   <div id="app">
     <MenuBarMac />
     <Sidebar />
-    <Hello />
+    <div class="home_content">
+      <Hello />
+    </div>
   </div>
 </template>
 

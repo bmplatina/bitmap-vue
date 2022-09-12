@@ -1,18 +1,23 @@
-<script setup lang="ts"></script>
-
 <template>
   <div class="menuBar">
     <div class="topBar">
       <div class="titleBar">
-        <button id="showHideMenus" class="toggleButtons" @click="">
-          <i class="bx bx-menu" id="btn"></i>
-        </button>
         <img src="./assets/BitmapESD.png" id="bmp_img" />
         <div class="title">Bitmap</div>
       </div>
     </div>
   </div>
 </template>
+
+<script defer lang="ts">
+export default {
+  name: "MenuBar",
+  data() {
+    return {};
+  },
+  components: {},
+};
+</script>
 
 <style scoped>
 .menuBar {

@@ -6877,6 +6877,11 @@ vue-codemod@^0.0.5:
     source-map "^0.6.1"
     yargs "^16.2.0"
 
+vue-head@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/vue-head/-/vue-head-2.2.0.tgz#9e3a141d5a011599a3f6d7adb42a65c428cf73e1"
+  integrity sha512-Oss1gakOSPQ4e/XZ0yM7yolnhSDvfDYZbM6CDD3xkCpAyPfTR+Bv3tabgtKE41gHr5GzC/NJh1EwQSu7o05XRw==
+
 vue-router@^4.1.5:
   version "4.1.5"
   resolved "https://registry.npmjs.org/vue-router/-/vue-router-4.1.5.tgz"
