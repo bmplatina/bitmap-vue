@@ -64,5 +64,6 @@ a {
 
 #bitmap_logo {
   height: 450px;
+  filter: drop-shadow(0px 0px 25px #000);
 }
 </style>
