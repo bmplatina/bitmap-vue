@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
+    "target": "es2017",
     "module": "commonjs",
+    "lib": ["ES2017"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "../../build/main",
     "allowJs": true,
-    "noImplicitAny": false,
+    "noImplicitAny": false
   },
   "exclude": ["static"]
 }
