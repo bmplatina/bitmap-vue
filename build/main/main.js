@@ -36,6 +36,7 @@ function createWindow() {
         minHeight: 700,
         fullscreenable: true,
         titleBarStyle: "hiddenInset",
+        frame: isMac,
         titleBarOverlay: {
             color: "#2f3241",
             symbolColor: "#74b1be",

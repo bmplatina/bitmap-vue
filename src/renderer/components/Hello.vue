@@ -1,10 +1,12 @@
 <script setup lang="ts">
-const msg = "Electron + Vue3 template";
+// const msg = "Electron + Vue3 template";
+const msg = "Bitmap";
 </script>
 
 <template>
   <div id="hello">
-    <img src="http://vuejs.org/images/logo.png" />
+    <!-- <img src="http://vuejs.org/images/logo.png" /> -->
+    <img src="./assets/BitmapESD.png" id="bitmap_logo" />
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -58,5 +60,9 @@ li {
 
 a {
   color: #42b983;
+}
+
+#bitmap_logo {
+  height: 450px;
 }
 </style>

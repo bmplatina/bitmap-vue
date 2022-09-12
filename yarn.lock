@@ -3118,6 +3118,13 @@
     "minimist" "^1.2.0"
     "plist" "^3.0.1"
 
+"electron-progressbar@^2.0.1":
+  "integrity" "sha512-+N60GX2q+KH5OvZXxwtjMTZB/1AyxriFd95vOnR3sOfNpvz+30LMsM0a9SnEivZE6N8Djy7F3z4TY8pLs8aopw=="
+  "resolved" "https://registry.npmjs.org/electron-progressbar/-/electron-progressbar-2.0.1.tgz"
+  "version" "2.0.1"
+  dependencies:
+    "extend" "^3.0.1"
+
 "electron-publish@23.4.0":
   "integrity" "sha512-awemHeSCLZDL44foMN4AUy7WOtFAiuUPMPtUxy+1xJonjWremIeyTvS7Rzv+s6uRFew+mTkwFRDirtly9f6xGw=="
   "resolved" "https://registry.npmjs.org/electron-publish/-/electron-publish-23.4.0.tgz"
@@ -3404,6 +3411,11 @@
   dependencies:
     "assign-symbols" "^1.0.0"
     "is-extendable" "^1.0.1"
+
+"extend@^3.0.1":
+  "integrity" "sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g=="
+  "resolved" "https://registry.npmjs.org/extend/-/extend-3.0.2.tgz"
+  "version" "3.0.2"
 
 "external-editor@^3.0.3":
   "integrity" "sha512-hMQ4CX1p1izmuLYyZqLMO/qGNw10wSv9QDCPfzXfyFrOaCSSoRfqE1Kf1s5an66J5JZC62NewG+mK49jOCtQew=="

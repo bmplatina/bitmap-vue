@@ -27,6 +27,7 @@
 }
 
 .menuBar > .topBar {
+  position: fixed;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -46,27 +47,6 @@
   flex-direction: row;
   align-items: center;
   width: 100%;
-}
-
-.titleBar > .toggleButton {
-  width: 45px;
-  height: 35px;
-  border: none;
-  outline: none;
-  background-color: transparent;
-  background-image: url("");
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: 0.2s;
-  cursor: pointer;
-}
-
-.titleBar > .toggleButton:hover {
-  background-color: #272c36;
-}
-
-.titleBar > .toggleButton:active {
-  background-color: #4f9fee;
 }
 
 .titleBar > img {

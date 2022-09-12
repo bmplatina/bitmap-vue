@@ -12,14 +12,13 @@
     "build:mac": "node scripts/build.js && electron-builder -c config/electron-builder.json --mac",
     "build:linux": "node scripts/build.js && electron-builder -c config/electron-builder.json --linux"
   },
-  "repository": "https://github.com/deluze/electron-vue-template",
-  "author": {
-    "name": "Platina",
-    "url": "http://prodbybitmap.com/"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/bmplatina/bitmap.git"
+  },
+  "author": {
+    "name": "Platina",
+    "url": "http://prodbybitmap.com/"
   },
   "bugs": {
     "url": "https://github.com/bmplatina/bitmap/issues"
@@ -37,6 +36,7 @@
   },
   "dependencies": {
     "@electron/remote": "^2.0.8",
+    "electron-progressbar": "^2.0.1",
     "vue": "^3.2.37",
     "vue-router": "^4.1.5"
   }
