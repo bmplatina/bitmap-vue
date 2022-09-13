@@ -14,4 +14,4 @@ Bitmap Application and ESD Project (Bitmap.aep) is an Application project which 
 Any contribution is welcome. I only have experience in developing console applications using C/C++, and Unreal Engine Blueprints. I'm just new to HTML, CSS, and JavaScript so I totally need community's help.
 
 # Contact
-Jaehyeok Lee (as known as Platina, founder of Bitmap): ryuplatina@icloud.com
+Jaehyeok Lee (as known as Platina, founder of Bitmap): <ryuplatina@icloud.com>
