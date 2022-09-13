@@ -5,7 +5,7 @@
         <img src="./assets/BitmapESD.png" id="bmp_img" />
         <div class="title">Bitmap</div>
       </div>
-      <div class="titleBarButtons">
+      <div class="titleBarButtons" v-if="isWin">
         <button class="topBtn minimizeBtn" id="minimizeBtn" title="Minimize">
           <font-awesome-icon icon="fa-solid fa-window-minimize" />
         </button>
@@ -25,7 +25,7 @@ export default {
   name: "MenuBar",
   data() {
     return {
-      isWin: navigator.platform === 'Win32'
+      isWin: navigator.platform === "Win32",
     };
   },
   components: {},
