@@ -26,7 +26,7 @@
       <li></li>
       <li v-for="(menuElements, index) in menu" :key="index">
         <a href="#" target="_blank">
-          <i class="{menuLogo[index]: true}"></i>
+          <i class="bx" :class="`${menuLogo[index]}`"></i>
           <span class="links_name">{{ menu[index] }}</span>
         </a>
         <span class="tooltip">{{ menu[index] }}</span>
@@ -64,18 +64,18 @@ export default {
         "Settings",
       ],
       menuLogo: [
-        "bx bx-book-open",
-        "bx bx-news",
-        "bx bx-chat",
-        "bx bx-folder",
-        "bx bx-game",
-        "bx bx-cloud-download",
-        "bx bx-user-circle",
-        "bx bx-cog",
+        "bx-book-open",
+        "bx-news",
+        "bx-chat",
+        "bx-folder",
+        "bx-game",
+        "bx-cloud-download",
+        "bx-user-circle",
+        "bx-cog",
       ],
       user: {
         name: "Platina",
-        description: "Leader of Bitmap",
+        description: "Admin of Bitmap",
       },
     };
   },
