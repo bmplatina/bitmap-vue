@@ -4,15 +4,11 @@
 Welcome to Bitmap! We're preparing service platform for our teammates, and free ESD (Electronic Software Distribution) for everyone. Hope you're interested in.
 
 ## Getting started
-### Prerequisites
-- Any platform with Node.js LTS or newer installed. Latest version of Node.js is recommended.
+- [Build from sources](https://github.com/bmplatina/bitmap/wiki/How-to-build-from-source)
+- [API Document](https://github.com/bmplatina/bitmap/wiki/API)
 
-### Download from GitHub releases
-You can visit GitHub [Release page](https://github.com/bmplatina/bitmap/releases) to download.
+# Contributions
+Any contribution is welcome. I only have experience in developing console applications using C/C++, and Unreal Engine Blueprints. I'm just new to HTML, CSS, and JavaScript so I totally need community's help.
 
-##### Build from source
-Open terminal and type:
-```bash
-$ git clone https://github.com/bmplatina/bitmap.git # git
-$ gh repo clone bmplatina/bitmap # GitHub CLI
-```
+# Contact
+Jaehyeok Lee (as known as Platina, founder of Bitmap): ryuplatina@icloud.com
