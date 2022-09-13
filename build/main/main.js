@@ -32,10 +32,10 @@ const isMac = process.platform === "darwin";
 remote.initialize();
 function createWindow() {
     const mainWindow = new electron_1.BrowserWindow({
-        width: 1280,
-        height: 720,
+        width: 1600,
+        height: 900,
         minWidth: 1000,
-        minHeight: 700,
+        minHeight: 800,
         fullscreenable: true,
         titleBarStyle: "hiddenInset",
         title: "Bitmap",
