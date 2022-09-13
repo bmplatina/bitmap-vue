@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ipcRenderer } from "./electron";
-import MenuBarMac from "./components/menuBarMac.vue";
+import MenuBar from "./components/Menubar.vue";
 import Hello from "./components/Hello.vue";
 import Sidebar from "./components/Sidebar.vue";
 
@@ -9,7 +9,7 @@ ipcRenderer.send("message", "Hello from App.vue!");
 
 <template>
   <div id="app">
-    <MenuBarMac />
+    <MenuBar />
     <Sidebar />
     <div class="home_content">
       <Hello />
@@ -44,6 +44,10 @@ ipcRenderer.send("message", "Hello from App.vue!");
     background: #ddd;
     color: black;
   }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .home_content {

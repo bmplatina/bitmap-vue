@@ -5,15 +5,32 @@
         <img src="./assets/BitmapESD.png" id="bmp_img" />
         <div class="title">Bitmap</div>
       </div>
+      <div class="titleBarButtons" v-if="isWin == true">
+        <button class="topBtn minimizeBtn" id="minimizeBtn" title="Minimize">
+          Mi
+          <!-- <i class="fa-solid fa-window-minimize"></i> -->
+        </button>
+        <button class="topBtn maximizeBtn" id="maxResBtn" title="Maximize">
+          Ma
+          <!-- <i class="fa-light fa-window-maximize"></i> -->
+        </button>
+        <button class="topBtn closeBtn" id="closeBtn" title="Close">
+          Cl
+          <!-- <i class="fa-solid fa-xmark"></i> -->
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script defer lang="ts">
+const maxResBtn = document.getElementById(('maxResBtn'));
 export default {
   name: "MenuBar",
   data() {
-    return {};
+    return {
+      isWin: navigator.platform === 'Win32'
+    };
   },
   components: {},
 };
