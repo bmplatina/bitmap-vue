@@ -1,11 +1,11 @@
 <template>
   <div class="menuBar">
     <div class="topBar">
-      <div class="titleBar">
+      <div :class="{ titleBarWin: isWin || isFullScreen, titleBar: !isWin }">
         <img src="./assets/BitmapESD.png" id="bmp_img" />
         <div class="title">Bitmap</div>
       </div>
-      <div class="titleBarButtons" v-if="isWin == true">
+      <div class="titleBarButtons" v-if="isWin">
         <button class="topBtn minimizeBtn" id="minimizeBtn" title="Minimize">
           Mi
           <!-- <i class="fa-solid fa-window-minimize"></i> -->
@@ -29,7 +29,8 @@ export default {
   name: "MenuBar",
   data() {
     return {
-      isWin: navigator.platform === 'Win32'
+      isWin: navigator.platform === 'Win32',
+      isFullScreen: window.innerHeight === screen.height
     };
   },
   components: {},
@@ -64,7 +65,21 @@ export default {
   margin-left: 75px;
 }
 
+.topBar > .titleBarWin {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 15px;
+}
+
 .topBar > .titleBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.topBar > .titleBarWin {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -75,7 +90,20 @@ export default {
   margin-left: 10px;
 }
 
+.titleBarWin > img {
+  margin-left: 10px;
+}
+
 .titleBar > .title {
+  margin-left: 10px;
+  width: 100%;
+  line-height: 30px;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  -webkit-app-region: drag;
+}
+
+.titleBarWin > .title {
   margin-left: 10px;
   width: 100%;
   line-height: 30px;
