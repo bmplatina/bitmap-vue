@@ -25,6 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
 const path_1 = require("path");
+const isDev = __importStar(require("electron-is-dev"));
 const remote = __importStar(require("@electron/remote/main"));
 const autoUpdate = __importStar(require("./updater"));
 const isMac = process.platform === "darwin";
@@ -37,15 +38,12 @@ function createWindow() {
         minHeight: 700,
         fullscreenable: true,
         titleBarStyle: "hiddenInset",
-        frame: isMac,
-        titleBarOverlay: {
-            color: "#2f3241",
-            symbolColor: "#74b1be",
-        },
+        title: "Bitmap",
         webPreferences: {
             preload: (0, path_1.join)(__dirname, "preload.js"),
             nodeIntegration: true,
             contextIsolation: true,
+            devTools: isDev
         },
     });
     if (process.env.NODE_ENV === "development") {
@@ -55,33 +53,6 @@ function createWindow() {
     else {
         mainWindow.loadFile((0, path_1.join)(electron_1.app.getAppPath(), "renderer", "index.html"));
     }
-    // MARK: - Frameless Window Function
-    electron_1.ipcMain.on("closeApp", () => {
-        console.log("Clicked on Close button");
-        mainWindow.close();
-    });
-    electron_1.ipcMain.on("minimizeApp", () => {
-        console.log("Clicked on Minimize button");
-        mainWindow.minimize();
-    });
-    electron_1.ipcMain.on("maximizeRestoreApp", () => {
-        if (mainWindow.isMaximized()) {
-            console.log("Clicked on Maximize button");
-            mainWindow.restore();
-        }
-        else {
-            console.log("Clicked on Maximize button");
-            mainWindow.maximize();
-        }
-    });
-    // MARK: - Check Window Status
-    mainWindow.on("maximize", () => {
-        // Check Maximized
-        mainWindow.webContents.send("isMaximized");
-    });
-    mainWindow.on("unmaximize", () => {
-        mainWindow.webContents.send("isRestored");
-    });
     // MARK: - Dark, Light Mode
     electron_1.ipcMain.handle("dark-mode:toggle", () => {
         if (electron_1.nativeTheme.shouldUseDarkColors) {

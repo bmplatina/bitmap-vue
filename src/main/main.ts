@@ -8,12 +8,8 @@ import {
   nativeTheme,
 } from "electron";
 import { join } from "path";
-import * as os from "os";
-import * as fs from "fs";
 import * as isDev from "electron-is-dev";
-import * as log from "electron-log";
 import * as remote from "@electron/remote/main";
-import { makeUniversalApp } from "@electron/universal";
 import * as autoUpdate from "./updater"
 
 const isMac = process.platform === "darwin";
@@ -27,15 +23,12 @@ function createWindow() {
     minHeight: 700,
     fullscreenable: true,
     titleBarStyle: "hiddenInset",
-    frame: isMac,
-    titleBarOverlay: {
-      color: "#2f3241",
-      symbolColor: "#74b1be",
-    },
+    title: "Bitmap",
     webPreferences: {
       preload: join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: true,
+      devTools: isDev
     },
   });
 
@@ -45,37 +38,6 @@ function createWindow() {
   } else {
     mainWindow.loadFile(join(app.getAppPath(), "renderer", "index.html"));
   }
-
-  // MARK: - Frameless Window Function
-  ipcMain.on("closeApp", () => {
-    console.log("Clicked on Close button");
-    mainWindow.close();
-  });
-
-  ipcMain.on("minimizeApp", () => {
-    console.log("Clicked on Minimize button");
-    mainWindow.minimize();
-  });
-
-  ipcMain.on("maximizeRestoreApp", () => {
-    if (mainWindow.isMaximized()) {
-      console.log("Clicked on Maximize button");
-      mainWindow.restore();
-    } else {
-      console.log("Clicked on Maximize button");
-      mainWindow.maximize();
-    }
-  });
-
-  // MARK: - Check Window Status
-  mainWindow.on("maximize", () => {
-    // Check Maximized
-    mainWindow.webContents.send("isMaximized");
-  });
-
-  mainWindow.on("unmaximize", () => {
-    mainWindow.webContents.send("isRestored");
-  });
 
   // MARK: - Dark, Light Mode
   ipcMain.handle("dark-mode:toggle", () => {

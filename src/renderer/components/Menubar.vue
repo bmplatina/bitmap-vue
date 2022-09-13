@@ -1,22 +1,19 @@
 <template>
-  <div class="menuBar">
+  <div class="menuBar" v-if="!isWin">
     <div class="topBar">
-      <div :class="{ titleBarWin: isWin || isFullScreen, titleBar: !isWin }">
+      <div class="titleBar">
         <img src="./assets/BitmapESD.png" id="bmp_img" />
         <div class="title">Bitmap</div>
       </div>
-      <div class="titleBarButtons" v-if="isWin">
+      <div class="titleBarButtons">
         <button class="topBtn minimizeBtn" id="minimizeBtn" title="Minimize">
-          Mi
-          <!-- <i class="fa-solid fa-window-minimize"></i> -->
+          <font-awesome-icon icon="fa-solid fa-window-minimize" />
         </button>
         <button class="topBtn maximizeBtn" id="maxResBtn" title="Maximize">
-          Ma
-          <!-- <i class="fa-light fa-window-maximize"></i> -->
+          <font-awesome-icon icon="fa-regular fa-window-maximize" />
         </button>
         <button class="topBtn closeBtn" id="closeBtn" title="Close">
-          Cl
-          <!-- <i class="fa-solid fa-xmark"></i> -->
+          <font-awesome-icon icon="fa-solid fa-xmark" />
         </button>
       </div>
     </div>
@@ -24,13 +21,11 @@
 </template>
 
 <script defer lang="ts">
-const maxResBtn = document.getElementById(('maxResBtn'));
 export default {
   name: "MenuBar",
   data() {
     return {
-      isWin: navigator.platform === 'Win32',
-      isFullScreen: window.innerHeight === screen.height
+      isWin: navigator.platform === 'Win32'
     };
   },
   components: {},
@@ -65,21 +60,7 @@ export default {
   margin-left: 75px;
 }
 
-.topBar > .titleBarWin {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 15px;
-}
-
 .topBar > .titleBar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-}
-
-.topBar > .titleBarWin {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -90,20 +71,7 @@ export default {
   margin-left: 10px;
 }
 
-.titleBarWin > img {
-  margin-left: 10px;
-}
-
 .titleBar > .title {
-  margin-left: 10px;
-  width: 100%;
-  line-height: 30px;
-  margin-top: 5px;
-  padding-bottom: 5px;
-  -webkit-app-region: drag;
-}
-
-.titleBarWin > .title {
   margin-left: 10px;
   width: 100%;
   line-height: 30px;

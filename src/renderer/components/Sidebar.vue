@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" :class="{ active: isActive }">
+  <div class="sidebar" :class="{ active: isActive, win: isWin, nowin: !isWin }">
     <div class="logo_content">
       <div class="logo">
         <div class="logo_name">Bitmap</div>
@@ -52,6 +52,8 @@ export default {
   name: "SideBar",
   data() {
     return {
+      isWin: navigator.platform === 'Win32',
+      isFullScreen: window.innerHeight === screen.height,
       isActive: false,
       menu: [
         "Wiki",
@@ -86,7 +88,6 @@ export default {
 <style scoped lang="css">
 .sidebar {
   position: fixed;
-  margin-top: 37px;
   top: 0;
   left: 0;
   height: 100%;
@@ -94,6 +95,14 @@ export default {
   background: #11101d;
   padding: 6px 14px;
   transition: all 0.5s ease;
+}
+
+.sidebar .nowin {
+  margin-top: 37px;
+}
+
+.sidebar .win {
+  margin-top: 0px;
 }
 
 .sidebar.active {
