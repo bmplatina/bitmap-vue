@@ -14,6 +14,7 @@ import * as isDev from "electron-is-dev";
 import * as log from "electron-log";
 import * as remote from "@electron/remote/main";
 import { makeUniversalApp } from "@electron/universal";
+import * as autoUpdate from "./updater"
 
 const isMac = process.platform === "darwin";
 remote.initialize();
@@ -102,6 +103,8 @@ app.whenReady().then(() => {
     }
   });
 });
+
+autoUpdate.update();
 
 app.on("window-all-closed", function () {
   if (process.platform !== "darwin") app.quit();

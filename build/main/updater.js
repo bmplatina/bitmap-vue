@@ -23,11 +23,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.update = void 0;
 const electron_1 = require("electron");
 const electron_updater_1 = require("electron-updater");
 const ProgressBar = __importStar(require("electron-progressbar"));
 electron_updater_1.autoUpdater.autoDownload = false;
-module.exports = () => {
+function update() {
     electron_updater_1.autoUpdater.checkForUpdates();
     let progressBar;
     // 업데이트가 가능한지 확인하는 부분이다.
@@ -79,4 +80,6 @@ module.exports = () => {
                 electron_updater_1.autoUpdater.quitAndInstall(false, true);
         });
     });
-};
+}
+exports.update = update;
+;

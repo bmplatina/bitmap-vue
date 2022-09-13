@@ -4,7 +4,7 @@ import * as ProgressBar from "electron-progressbar";
 
 autoUpdater.autoDownload = false;
 
-module.exports = () => {
+export function update() {
   autoUpdater.checkForUpdates();
   let progressBar;
 

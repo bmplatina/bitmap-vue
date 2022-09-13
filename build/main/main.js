@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
 const path_1 = require("path");
 const remote = __importStar(require("@electron/remote/main"));
+const autoUpdate = __importStar(require("./updater"));
 const isMac = process.platform === "darwin";
 remote.initialize();
 function createWindow() {
@@ -106,6 +107,7 @@ electron_1.app.whenReady().then(() => {
         }
     });
 });
+autoUpdate.update();
 electron_1.app.on("window-all-closed", function () {
     if (process.platform !== "darwin")
         electron_1.app.quit();
