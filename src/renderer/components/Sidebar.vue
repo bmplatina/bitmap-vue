@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" :class="{ active: isActive, win: isWin, nowin: !isWin }">
+  <div class="sidebar" :class="{ active: isActive, win: isWin, mac: isMac }">
     <div class="logo_content">
       <div class="logo">
         <div class="logo_name">Bitmap</div>
@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       isWin: navigator.platform === 'Win32',
-      isFullScreen: window.innerHeight === screen.height,
+      isMac: navigator.platform === 'MacIntel',
       isActive: false,
       menu: [
         "Wiki",
@@ -97,7 +97,7 @@ export default {
   transition: all 0.5s ease;
 }
 
-.sidebar .nowin {
+.sidebar .mac {
   margin-top: 37px;
 }
 
