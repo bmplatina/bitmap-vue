@@ -6,12 +6,14 @@ import {
   globalShortcut,
   ipcMain,
   nativeTheme,
+  TouchBar,
 } from "electron";
 import { join } from "path";
 import * as isDev from "electron-is-dev";
 import * as remote from "@electron/remote/main";
 import * as autoUpdate from "./updater";
 
+const { TouchBarLabel, TouchBarButton, TouchBarSpacer } = TouchBar;
 const isMac = process.platform === "darwin";
 remote.initialize();
 
