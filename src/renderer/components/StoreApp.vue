@@ -1,4 +1,5 @@
 <template>
+  <button id="btn" @click="isModalOpened = true">Modal Open</button>
   <div class="app_modal" v-if="isModalOpened">
     <div class="black_bg">
       <div class="white_bg">
@@ -24,8 +25,11 @@ export default {
 
 <style scoped lang="css">
 .app_modal {
-  margin: 0;
+  margin: 0px;
   box-sizing: border-box;
+}
+
+#btn {
 }
 
 .black_bg {
