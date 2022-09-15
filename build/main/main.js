@@ -28,6 +28,7 @@ const path_1 = require("path");
 const isDev = __importStar(require("electron-is-dev"));
 const remote = __importStar(require("@electron/remote/main"));
 const autoUpdate = __importStar(require("./updater"));
+const { TouchBarLabel, TouchBarButton, TouchBarSpacer } = electron_1.TouchBar;
 const isMac = process.platform === "darwin";
 remote.initialize();
 function createWindow() {
