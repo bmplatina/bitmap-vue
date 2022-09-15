@@ -3,6 +3,7 @@
   <div class="app_modal" v-if="isModalOpened">
     <div class="black_bg">
       <div class="white_bg">
+        <button id="btn" @click="isModalOpened = false">Modal Close</button>
         <webview
           src="https://docs.google.com/forms/d/e/1FAIpQLSfJ3LJQ-ru-_vyI4fgsw8hWjiUQp1Vq9XQ0IV6u_mleuKHnHQ/viewform?embedded=true"
           style="width: 1000px; height: 800px; margin: 8px"
