@@ -10,7 +10,7 @@ import {
 import { join } from "path";
 import * as isDev from "electron-is-dev";
 import * as remote from "@electron/remote/main";
-import * as autoUpdate from "./updater"
+import * as autoUpdate from "./updater";
 
 const isMac = process.platform === "darwin";
 remote.initialize();
@@ -28,7 +28,8 @@ function createWindow() {
       preload: join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: true,
-      devTools: isDev
+      webviewTag: true,
+      devTools: isDev,
     },
   });
 

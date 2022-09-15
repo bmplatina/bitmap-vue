@@ -43,7 +43,8 @@ function createWindow() {
             preload: (0, path_1.join)(__dirname, "preload.js"),
             nodeIntegration: true,
             contextIsolation: true,
-            devTools: isDev
+            webviewTag: true,
+            devTools: isDev,
         },
     });
     if (process.env.NODE_ENV === "development") {

@@ -3,6 +3,7 @@ import { ipcRenderer } from "./electron";
 import MenuBar from "./components/Menubar.vue";
 import Hello from "./components/Hello.vue";
 import Sidebar from "./components/Sidebar.vue";
+import StoreApp from "./components/StoreApp.vue";
 
 ipcRenderer.send("message", "Hello from App.vue!");
 </script>
@@ -12,7 +13,7 @@ ipcRenderer.send("message", "Hello from App.vue!");
     <MenuBar />
     <Sidebar />
     <div class="home_content">
-      <Hello />
+      <StoreApp />
     </div>
   </div>
 </template>
