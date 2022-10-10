@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import VueHead from "vue-head";
-import App from "./TestApp.vue";
+import App from "./App.vue";
 
 /* import the fontawesome core */
 import { library } from "@fortawesome/fontawesome-svg-core";
