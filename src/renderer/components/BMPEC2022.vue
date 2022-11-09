@@ -1,5 +1,7 @@
 <template>
-  <div>Project Files View</div>
+  <div>
+    <p>BMPEC2022</p>
+  </div>
 </template>
 <script defer lang="ts">
 export default {};

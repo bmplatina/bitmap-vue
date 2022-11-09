@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>Settings View</div>
 </template>
 <script defer lang="ts">
 export default {};

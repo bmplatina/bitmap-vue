@@ -6,6 +6,7 @@ import ProjectFiles from "./components/ProjectFiles.vue";
 import Library from "./components/Library.vue";
 import User from "./components/User.vue";
 import Settings from "./components/Settings.vue";
+import Contest from "./components/BMPEC2022.vue";
 
 ipcRenderer.send("message", "Hello from App.vue!");
 </script>
@@ -27,6 +28,7 @@ export default {
         "Library",
         "Users",
         "Settings",
+        "BMPEC2022",
       ],
       menuLogo: [
         "bx-book-open",
@@ -37,6 +39,7 @@ export default {
         "bx-cloud-download",
         "bx-user-circle",
         "bx-cog",
+        "bx-crown",
       ],
       user: {
         name: "Platina",
@@ -119,30 +122,30 @@ export default {
       </div>
     </div>
     <div class="home_content">
-      <!-- <StoreApp v-if="!isWin" /> -->
       <!-- Main, Wiki -->
       <webview
-        src="http://192.168.50.43"
+        src="http://prodbybitmap.com/"
         style="width: 100%; height: 100%"
         v-if="selectedMenu == 0"
       ></webview>
       <!-- Newsroom -->
       <webview
-        src="http://192.168.50.43"
+        src="http://prodbybitmap.com/commission/bitmap_notices/"
         style="width: 100%; height: 100%"
         v-if="selectedMenu == 1"
       ></webview>
       <!-- Blog -->
       <webview
-        src="http://192.168.50.43"
+        src="http://prodbybitmap.com/commission/blog/"
         style="width: 100%; height: 100%"
         v-if="selectedMenu == 2"
       ></webview>
-      <ProjectFiles v-show="selectedMenu == 3" />
-      <Games v-show="selectedMenu == 4" />
-      <Library v-show="selectedMenu == 5" />
-      <User v-show="selectedMenu == 6" />
-      <Settings v-show="selectedMenu == 7" />
+      <ProjectFiles v-if="selectedMenu == 3" />
+      <Games v-if="selectedMenu == 4" />
+      <Library v-if="selectedMenu == 5" />
+      <User v-if="selectedMenu == 6" />
+      <Settings v-if="selectedMenu == 7" />
+      <Contest v-if="selectedMenu == 8" />
     </div>
   </div>
 </template>
@@ -182,8 +185,8 @@ export default {
 }
 
 .home_content {
-  position: absolute;
-  margin-top: 42px;
+  position: fixed;
+  padding-top: 34px;
   height: 100%;
   width: calc(100% - 78px);
   left: 78px;

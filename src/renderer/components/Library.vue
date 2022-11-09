@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>Downloaded Library View</div>
 </template>
 <script defer lang="ts">
 export default {};
