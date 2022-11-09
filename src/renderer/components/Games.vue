@@ -1,14 +1,21 @@
 <template>
   <div>
-    Game List View
-    <p>Whole API</p>
-    <span>gameInfo: {{ games }}</span>
-    <p>Listed API</p>
-    <span v-for="(item, index) in games" :key="index">
-      <p>gameTitle: {{ item.gameTitle }}</p>
-      <p>gameEngine: {{ item.gameEngine }}</p>
-    </span>
-    <button class="dark-bg" v-if="isModalOpened" @click="isModalOpened = false">
+    <p>Games</p>
+    <div class="title"></div>
+    <div class="lists">
+      <a class="game-thumbnails" v-for="(item, index) in games" :key="index">
+        <img
+          class="game-images"
+          :src="item.gameImageURL"
+          :alt="item.gameTitle"
+        />
+      </a>
+    </div>
+    <button
+      class="dark-bg"
+      v-if="isSubmitModalOpened"
+      @click="isSubmitModalOpened = false"
+    >
       <div class="white-fg">
         <p>Submit to Bitmap Store</p>
         <webview
@@ -18,7 +25,11 @@
     </button>
   </div>
   <footer>
-    <a class="submit-games" v-if="!isModalOpened" @click="isModalOpened = true">
+    <a
+      class="submit-games"
+      v-if="!isSubmitModalOpened"
+      @click="isSubmitModalOpened = true"
+    >
       <font-awesome-icon icon="fa-solid fa-upload" />
     </a>
   </footer>
@@ -29,7 +40,7 @@ import { gameAPI } from "../electron";
 export default {
   data() {
     return {
-      isModalOpened: false,
+      isSubmitModalOpened: false,
       games: [
         {
           gameTitle: "",
@@ -61,6 +72,15 @@ export default {
 };
 </script>
 <style scoped lang="css">
+.game-thumbnails {
+  padding: 20px;
+}
+.game-images {
+  width: 300px;
+  border-radius: 24px;
+  box-shadow: 0px 0px 12px #000;
+}
+
 footer .submit-games {
   position: fixed;
   right: 25px;
@@ -74,7 +94,7 @@ footer .submit-games {
   background: #4188f1;
   border: none;
   outline: none;
-  box-shadow: 1px 1px 1px 1px black;
+  box-shadow: 0px 0px 20px #000;
 }
 
 footer .submit-button:hover {
