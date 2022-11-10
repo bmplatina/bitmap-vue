@@ -180,13 +180,10 @@ export default {
   }
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
 .home_content {
+  overflow: auto;
   position: fixed;
-  padding-top: 34px;
+  margin-top: 34px;
   height: 100%;
   width: calc(100% - 78px);
   left: 78px;
@@ -349,6 +346,7 @@ export default {
   line-height: 35px;
   text-align: center;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  z-index: 100;
   transition: 0s;
   opacity: 0;
   pointer-events: none;
