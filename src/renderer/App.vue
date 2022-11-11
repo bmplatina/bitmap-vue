@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { ipcRenderer } from "./electron";
-// import StoreApp from "./components/StoreApp.vue";
+
 import Games from "./components/Games.vue";
 import ProjectFiles from "./components/ProjectFiles.vue";
 import Library from "./components/Library.vue";
 import User from "./components/User.vue";
 import Settings from "./components/Settings.vue";
 import Contest from "./components/BMPEC2022.vue";
-
-ipcRenderer.send("message", "Hello from App.vue!");
 </script>
 
 <script defer lang="ts">
