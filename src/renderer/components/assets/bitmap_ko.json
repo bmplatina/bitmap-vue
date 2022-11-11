@@ -25,6 +25,7 @@
   "REQ_MAC": "",
 
   "installGame": "설치",
+  "downloads": "다운로드",
   "download": "다운로드",
   "update": "업데이트",
   "runGame": "플레이",
@@ -33,5 +34,6 @@
   "abort": "중단",
 
   "BMPEC_HEADLINE": "총 14만원 상당 상금",
-  "BMPEC_TITLE": "2022 비트맵 에디팅 대회"
+  "BMPEC_TITLE": "2022 비트맵 에디팅 대회",
+  "BMPEC_INITIAL": "에디팅 컨테스트"
 }

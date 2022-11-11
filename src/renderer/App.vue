@@ -17,6 +17,8 @@ export default {
       isWin: navigator.platform === "Win32",
       isActive: false,
       selectedMenu: 0,
+      downloadsString: this.$t("downloads"),
+      bmpecString: this.$t("BMPEC_INITIAL"),
       menu: [
         this.$t("wiki"),
         this.$t("newsRoom"),
@@ -42,6 +44,17 @@ export default {
       user: {
         name: "Platina",
         description: "Developer Mode",
+      },
+      selectedMenuToString: function () {
+        let menu: String = "";
+        if (this.selectedMenu == 3 || this.selectedMenu == 4) {
+          menu = this.downloadsString;
+        } else if (this.selectedMenu == 8) {
+          menu = this.bmpecString;
+        } else {
+          menu = this.menu[this.selectedMenu];
+        }
+        return menu;
       },
     };
   },
@@ -77,7 +90,9 @@ export default {
     <div class="sidebar no_windows" :class="{ active: isActive }">
       <div class="logo_content">
         <div class="logo">
-          <div class="logo_name">{{ $t("bitmapTitle") }}</div>
+          <div class="logo_name">
+            {{ $t("bitmapTitle") }} {{ selectedMenuToString() }}
+          </div>
         </div>
         <button
           id="showHideMenus"
@@ -103,9 +118,13 @@ export default {
           <!-- <a href="#" target="_blank"> -->
           <a v-on:click="selectedMenu = index">
             <i class="bx" :class="`${menuLogo[index]}`"></i>
-            <span class="links_name">{{ menu[index] }}</span>
+            <span class="links_name" style="white-space: nowrap">{{
+              menu[index]
+            }}</span>
           </a>
-          <span class="tooltip">{{ menu[index] }}</span>
+          <span class="tooltip" style="white-space: nowrap">{{
+            menu[index]
+          }}</span>
         </li>
       </ul>
       <div class="profile_content">
@@ -152,6 +171,7 @@ export default {
 
 <style lang="css">
 @import url("https://fonts.googleapis.com/css?family=Poppins");
+@import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
 @import url("https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css");
 
 /* Global */
@@ -159,8 +179,8 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", "Apple SD Gothic Neo", "Spoqa Han Sans",
-    "SpoqaHanSans", "Noto Sans KR", "Noto Sans", "Noto Sans CJK KR",
+  font-family: "Poppins", "Noto Sans KR", "Apple SD Gothic Neo",
+    "Spoqa Han Sans", "SpoqaHanSans", "Noto Sans", "Noto Sans CJK KR",
     "NanumBarunGothic", "Nanum Gothic", "KoPub Dotum", "Malgun Gothic",
     "맑은 고딕", sans-serif;
   -webkit-user-select: none;

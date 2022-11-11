@@ -260,8 +260,8 @@ export default {
 }
 .game-dialogue {
   position: absolute;
-  top: 62%;
-  left: 50%;
+  top: 60%;
+  left: 80%;
   width: 220px;
 }
 .game-name {

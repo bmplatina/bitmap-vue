@@ -25,6 +25,7 @@
   "REQ_MAC": "",
 
   "installGame": "Install",
+  "downloads": "Downloads",
   "download": "Download",
   "update": "Update",
   "runGame": "Play",
@@ -33,5 +34,6 @@
   "abort": "Abort",
 
   "BMPEC_HEADLINE": "USD $100 POOL PRIZE",
-  "BMPEC_TITLE": "Bitmap Editing Contest 2022"
+  "BMPEC_TITLE": "Bitmap Editing Contest 2022",
+  "BMPEC_INITIAL": "Editing Contest"
 }
