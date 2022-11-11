@@ -342,6 +342,10 @@ export default {
   transform: translateX(-50%);
 }
 
+.toggleButtons {
+  background: none;
+}
+
 .sidebar.active #btn {
   left: 90%;
 }
