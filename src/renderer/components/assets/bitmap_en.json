@@ -1,0 +1,37 @@
+{
+  "bitmapTitle": "Bitmap",
+  "search": "Search",
+  "wiki": "Wiki",
+  "newsRoom": "Newsroom",
+  "blog": "Blog",
+  "projectFiles": "Project Files",
+  "games": "Games",
+  "dlLibrary": "Library",
+  "users": "Users",
+  "settings": "Settings",
+
+  "submitForm": "Submit to Bitmap Store",
+
+  "earlyAccess": "EARLY ACCESS",
+  "releasedDate": "Released on ",
+  "genre": "Genre: ",
+  "devShort": "Dev: ",
+  "devFull": "Developer: ",
+  "publisher": "Publisher: ",
+  "viewGameWebsite": "View Website",
+  "preview": "Preview",
+  "requirements": "Requiremments",
+  "REQ_WIN": "",
+  "REQ_MAC": "",
+
+  "installGame": "Install",
+  "download": "Download",
+  "update": "Update",
+  "runGame": "Play",
+  "remove": "Remove",
+  "cancel": "Cancel",
+  "abort": "Abort",
+
+  "BMPEC_HEADLINE": "USD $100 POOL PRIZE",
+  "BMPEC_TITLE": "Bitmap Editing Contest 2022"
+}

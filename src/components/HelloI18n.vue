@@ -1,30 +1,33 @@
 <template>
-  <p>{{ t('hello') }}</p>
+  <p>{{ t("hello") }}</p>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
-  name: 'HelloI18n',
+  name: "HelloI18n",
   setup() {
     const { t } = useI18n({
       inheritLocale: true,
-      useScope: 'local'
-    })
+      useScope: "local",
+    });
 
     // Something todo ..
 
-    return { t }
-  }
-})
+    return { t };
+  },
+});
 </script>
 
 <i18n>
 {
   "en": {
     "hello": "Hello i18n in SFC!"
+  }
+  "ko": {
+    "hello": "i18n에 오신 것을 환영합니다!"
   }
 }
 </i18n>

@@ -20,14 +20,14 @@ export default {
       isActive: false,
       selectedMenu: 0,
       menu: [
-        "Wiki",
-        "Newsroom",
-        "Blog",
-        "Project Files",
-        "Games",
-        "Library",
-        "Users",
-        "Settings",
+        this.$t("wiki"),
+        this.$t("newsRoom"),
+        this.$t("blog"),
+        this.$t("projectFiles"),
+        this.$t("games"),
+        this.$t("dlLibrary"),
+        this.$t("users"),
+        this.$t("settings"),
         "BMPEC2022",
       ],
       menuLogo: [
@@ -43,7 +43,7 @@ export default {
       ],
       user: {
         name: "Platina",
-        description: "Admin of Bitmap",
+        description: "Developer Mode",
       },
     };
   },
@@ -58,7 +58,7 @@ export default {
       <div class="topBar">
         <div class="titleBar" :class="{ is_windows_or_fullscreen: isWin }">
           <img src="./components/assets/BitmapESD.png" id="bmp_img" />
-          <div class="title">Bitmap</div>
+          <div class="title">{{ $t("bitmapTitle") }}</div>
         </div>
         <div class="titleBarButtons" v-if="isWin">
           <button
@@ -79,7 +79,7 @@ export default {
     <div class="sidebar no_windows" :class="{ active: isActive }">
       <div class="logo_content">
         <div class="logo">
-          <div class="logo_name">Bitmap</div>
+          <div class="logo_name">{{ $t("bitmapTitle") }}</div>
         </div>
         <button
           id="showHideMenus"
@@ -95,10 +95,10 @@ export default {
           <a href="#">
             <i class="bx bx-search" @click="isActive = !isActive"></i>
             <form action="http://prodbybitmap.com/w/index.php" method="GET">
-              <input type="search" placeholder="Search..." />
+              <input type="search" :placeholder="$t('search') + '...'" />
             </form>
           </a>
-          <span class="tooltip">Search</span>
+          <span class="tooltip">{{ $t("search") }}</span>
         </li>
         <li></li>
         <li v-for="(menuElements, index) in menu" :key="index">
@@ -211,7 +211,7 @@ export default {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border: 1px solid #11101d;
+  border: 0px solid #11101d;
   -webkit-box-sizing: border-box;
 }
 
@@ -261,14 +261,15 @@ export default {
   height: 34px;
   border: none;
   outline: none;
-  background-color: transparent;
+  background-color: #1b1d23;
   background-repeat: no-repeat;
   background-position: center;
-  transform: 0.2s ease;
+  transform: 0.5s ease;
   cursor: pointer;
 }
 .titleBarButtons > .topBtn:hover {
   background-color: #272c36;
+  transform: 0.5s ease;
 }
 .titleBarButtons > .topBtn:active {
   background-color: #4f9fee;
@@ -343,7 +344,9 @@ export default {
 }
 
 .toggleButtons {
-  background: none;
+  border: none;
+  background-color: #11101d;
+  background: #11101d;
 }
 
 .sidebar.active #btn {

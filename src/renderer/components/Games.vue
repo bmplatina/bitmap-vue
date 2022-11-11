@@ -1,7 +1,7 @@
 <template>
   <div style="padding: 20px">
     <header>
-      <h1>Games</h1>
+      <h1>{{ $t("games") }}</h1>
     </header>
     <div class="title"></div>
     <table class="lists">
@@ -43,7 +43,7 @@
             <div class="game-info">
               {{ item.gameGenre }}
               <hr size="0.5px" style="padding: 2px" />
-              Dev: {{ item.gameDeveloper }}
+              {{ $t("devShort") }}{{ item.gameDeveloper }}
             </div>
           </div>
         </a>
@@ -58,7 +58,7 @@
       "
     >
       <div class="white-fg submit-box" v-if="isSubmitModalOpened">
-        <p>Submit to Bitmap Store</p>
+        <p>{{ $t("submitForm") }}</p>
         <webview
           src="https://docs.google.com/forms/d/e/1FAIpQLSfJ3LJQ-ru-_vyI4fgsw8hWjiUQp1Vq9XQ0IV6u_mleuKHnHQ/viewform?embedded=true"
         ></webview>
@@ -78,7 +78,9 @@
           <div style="float: right; width: 66%">
             <div align="left">
               <h1>{{ games[gameModal].gameTitle }}</h1>
-              <h3 v-show="games[gameModal].isEarlyAccess">EARLY ACCESS</h3>
+              <h3 v-show="games[gameModal].isEarlyAccess">
+                {{ $t("earlyAccess") }}
+              </h3>
               <img
                 class="platform modal"
                 src="./assets/platformWindows11.png"
@@ -103,18 +105,20 @@
                 alt="iOS, iPadOS"
                 v-show="games[gameModal].gamePlatformMobile"
               />
-              <p>Released on {{ games[gameModal].gameReleasedDate }}</p>
-              <p>Genre: {{ games[gameModal].gameGenre }}</p>
-              <p>Developer: {{ games[gameModal].gameDeveloper }}</p>
-              <p>Publisher: {{ games[gameModal].gamePublisher }}</p>
-              <a :href="games[gameModal].gameWebsite" target="_blank"
-                >View Website</a
-              >
+              <p>
+                {{ $t("releasedDate") }}{{ games[gameModal].gameReleasedDate }}
+              </p>
+              <p>{{ $t("genre") }}{{ games[gameModal].gameGenre }}</p>
+              <p>{{ $t("devFull") }}{{ games[gameModal].gameDeveloper }}</p>
+              <p>{{ $t("publisher") }}{{ games[gameModal].gamePublisher }}</p>
+              <a :href="games[gameModal].gameWebsite" target="_blank">{{
+                $t("viewGameWebsite")
+              }}</a>
             </div>
 
             <hr size="0.5px" style="padding: 2px" />
             <div class="modal-container preview">
-              <h1>Preview</h1>
+              <h1>{{ $t("preview") }}</h1>
               <hr size="0.5px" style="padding: 2px" />
               <center>
                 <webview
@@ -126,19 +130,20 @@
             <div class="modal-container description">
               <h1>{{ games[gameModal].gameHeadline }}</h1>
               <hr size="0.5px" style="padding: 2px" />
-              <p>{{ games[gameModal].gameDescription }}</p>
+              <p style="padding: 10px; text-align: left">
+                {{ games[gameModal].gameDescription }}
+              </p>
             </div>
-            <hr size="0.5px" style="padding: 2px" />
             <div class="modal-container requirements">
-              <h1>Requirements</h1>
-              <p>REQ_WIN, REQ_MAC</p>
+              <h1>{{ $t("requirements") }}</h1>
+              <p>{{ $t("REQ_WIN") }}, {{ $t("REQ_MAC") }}</p>
             </div>
             <div class="install-btns">
               <button
                 class="install-interactions"
                 v-if="!isGameInstalled[gameModal]"
               >
-                Install
+                {{ $t("installGame") }}
               </button>
               <div v-else-if="isGameInstalled[gameModal]">
                 <button
@@ -148,10 +153,14 @@
                     games[gameModal].gameVersion
                   "
                 >
-                  Update
+                  {{ $t("update") }}
                 </button>
-                <button class="install-interactions open">Run</button>
-                <button class="install-interactions remove">Remove</button>
+                <button class="install-interactions open">
+                  {{ $t("runGame") }}
+                </button>
+                <button class="install-interactions remove">
+                  {{ $t("remmove") }}
+                </button>
                 <div
                   class="installing-progress"
                   v-if="isGameInstalling[gameModal]"
@@ -162,7 +171,9 @@
                     max="100"
                     id="downloadProgress"
                   ></progress>
-                  <button class="install-interactions remove">Cancel</button>
+                  <button class="install-interactions remove">
+                    {{ $t("cancel") }}
+                  </button>
                 </div>
               </div>
             </div>

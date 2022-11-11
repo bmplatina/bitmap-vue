@@ -1,0 +1,37 @@
+{
+  "bitmapTitle": "비트맵",
+  "search": "검색",
+  "wiki": "위키",
+  "newsRoom": "뉴스룸",
+  "blog": "블로그",
+  "projectFiles": "프로젝트 파일",
+  "games": "게임",
+  "dlLibrary": "라이브러리",
+  "users": "계정",
+  "settings": "설정",
+
+  "submitForm": "비트맵 스토어 입점 신청",
+
+  "earlyAccess": "얼리 액세스",
+  "releasedDate": "발매일: ",
+  "genre": "장르: ",
+  "devShort": "개발: ",
+  "devFull": "개발: ",
+  "publisher": "유통: ",
+  "viewGameWebsite": "게임 웹사이트 보기",
+  "preview": "미리 보기",
+  "requirements": "요구 사항",
+  "REQ_WIN": "",
+  "REQ_MAC": "",
+
+  "installGame": "설치",
+  "download": "다운로드",
+  "update": "업데이트",
+  "runGame": "플레이",
+  "remove": "제거",
+  "cancel": "취소",
+  "abort": "중단",
+
+  "BMPEC_HEADLINE": "총 14만원 상당 상금",
+  "BMPEC_TITLE": "2022 비트맵 에디팅 대회"
+}
