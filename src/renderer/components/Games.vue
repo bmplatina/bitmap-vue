@@ -107,7 +107,9 @@
               <p>Genre: {{ games[gameModal].gameGenre }}</p>
               <p>Developer: {{ games[gameModal].gameDeveloper }}</p>
               <p>Publisher: {{ games[gameModal].gamePublisher }}</p>
-              <a :href="games[gameModal].gameWebsite">View Website</a>
+              <a :href="games[gameModal].gameWebsite" target="_blank"
+                >View Website</a
+              >
             </div>
 
             <hr size="0.5px" style="padding: 2px" />
@@ -221,6 +223,7 @@ export default {
       .then((response) => (this.games = response.data.games))
       .catch((error) => console.log(error));
   },
+  computed: {},
 };
 </script>
 <style scoped lang="css">
