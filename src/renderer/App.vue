@@ -91,7 +91,7 @@ export default {
       <div class="logo_content">
         <div class="logo">
           <div class="logo_name">
-            {{ $t("bitmapTitle") }} {{ selectedMenuToString() }}
+            {{ $t("bitmapTitle") }}: {{ selectedMenuToString() }}
           </div>
         </div>
         <button
