@@ -54,27 +54,29 @@ export default {
 <template>
   <div id="app">
     <!-- menuBar -->
-    <div class="menuBar" v-if="!isWin">
+    <div class="menuBar">
       <div class="topBar">
-        <div class="titleBar">
+        <div class="titleBar" :class="{ is_windows_or_fullscreen: isWin }">
           <img src="./components/assets/BitmapESD.png" id="bmp_img" />
           <div class="title">Bitmap</div>
         </div>
         <div class="titleBarButtons" v-if="isWin">
-          <button class="topBtn minimizeBtn" id="minimizeBtn" title="Minimize">
-            <font-awesome-icon icon="fa-solid fa-window-minimize" />
-          </button>
-          <button class="topBtn maximizeBtn" id="maxResBtn" title="Maximize">
-            <font-awesome-icon icon="fa-regular fa-window-maximize" />
-          </button>
-          <button class="topBtn closeBtn" id="closeBtn" title="Close">
-            <font-awesome-icon icon="fa-solid fa-xmark" />
-          </button>
+          <button
+            class="topBtn minimizeBtn"
+            id="minimizeBtn"
+            title="Minimize"
+          ></button>
+          <button
+            class="topBtn maximizeBtn"
+            id="maxResBtn"
+            title="Maximize"
+          ></button>
+          <button class="topBtn closeBtn" id="closeBtn" title="Close"></button>
         </div>
       </div>
     </div>
     <!-- sideBar -->
-    <div class="sidebar" :class="{ active: isActive, no_windows: !isWin }">
+    <div class="sidebar no_windows" :class="{ active: isActive }">
       <div class="logo_content">
         <div class="logo">
           <div class="logo_name">Bitmap</div>
@@ -150,7 +152,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style lang="css">
 @import url("https://fonts.googleapis.com/css?family=Poppins");
 @import url("https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css");
 
@@ -227,13 +229,11 @@ export default {
   flex-direction: row;
   align-items: center;
   margin-left: 75px;
+  width: 100%;
 }
 
-.topBar > .titleBar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
+.topBar > .titleBar.is_windows_or_fullscreen {
+  margin-left: 0px;
 }
 
 .titleBar > img {
@@ -247,6 +247,31 @@ export default {
   margin-top: 5px;
   padding-bottom: 5px;
   -webkit-app-region: drag;
+}
+
+.topBar > .titleBarButtons {
+  display: flex;
+  flex-direction: row;
+  width: 120px;
+  height: 34px;
+}
+
+.titleBarButtons > .topBtn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: 0.2s ease;
+  cursor: pointer;
+}
+.titleBarButtons > .topBtn:hover {
+  background-color: #272c36;
+}
+.titleBarButtons > .topBtn:active {
+  background-color: #4f9fee;
 }
 
 .title {
