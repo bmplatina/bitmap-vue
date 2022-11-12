@@ -17,7 +17,7 @@ export default {
       isWin: navigator.platform === "Win32",
       isActive: false,
       selectedMenu: 0,
-      downloadsString: this.$t("downloads"),
+      storeString: this.$t("store"),
       bmpecString: this.$t("BMPEC_INITIAL"),
       menu: [
         this.$t("wiki"),
@@ -48,7 +48,7 @@ export default {
       selectedMenuToString: function () {
         let menu: String = "";
         if (this.selectedMenu == 3 || this.selectedMenu == 4) {
-          menu = this.downloadsString;
+          menu = this.storeString;
         } else if (this.selectedMenu == 8) {
           menu = this.bmpecString;
         } else {
