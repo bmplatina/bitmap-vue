@@ -87,7 +87,7 @@ function createWindow() {
     store.set("locale", arg);
   });
   ipcMain.on("get-locale", (event) => {
-    event.sender.send(currentLocale);
+    event.sender.send("return-get-locale", currentLocale);
   });
 
   remote.enable(mainWindow.webContents);

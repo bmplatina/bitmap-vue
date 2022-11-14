@@ -91,11 +91,7 @@ export default {
             id="maxResBtn"
             @click="maximizeApp"
           ></button>
-          <button
-            class="topBtn closeBtn"
-            id="closeBtn"
-            @click="closeApp"
-          ></button>
+          <button class="closeBtn" id="closeBtn" @click="closeApp"></button>
         </div>
       </div>
     </div>
@@ -300,10 +296,30 @@ export default {
 }
 .titleBarButtons > .topBtn:hover {
   background-color: #272c36;
-  transform: 0.5s ease;
+  transition: 0.5s ease;
 }
 .titleBarButtons > .topBtn:active {
   background-color: #4f9fee;
+}
+
+.titleBarButtons > .closeBtn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  outline: none;
+  background-color: #1b1d23;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: 0.5s ease;
+  cursor: pointer;
+}
+.titleBarButtons > .closeBtn:hover {
+  background-color: #ff5f57;
+  filter: brightness(100%);
+  transition: 0.5s ease;
+}
+.titleBarButtons > .closeBtn:active {
+  filter: brightness(75%);
 }
 
 .title {

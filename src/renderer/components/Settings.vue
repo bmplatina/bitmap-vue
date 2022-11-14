@@ -7,6 +7,7 @@
       if (initialLanguage != currentLanguage) {
         isRestartRequiredSettingsChanged = true;
       }
+      saveLocale();
     "
   >
     한국어 (Korean)
@@ -18,6 +19,7 @@
       if (initialLanguage != currentLanguage) {
         isRestartRequiredSettingsChanged = true;
       }
+      saveLocale();
     "
   >
     English
@@ -25,6 +27,8 @@
   <h3 v-show="isRestartRequiredSettingsChanged">{{ $t("requireRestart") }}</h3>
 </template>
 <script defer lang="ts">
+import { ipcRenderer } from "../electron";
+
 export default {
   data() {
     return {
@@ -34,7 +38,17 @@ export default {
     };
   },
   created() {},
-  methods: {},
+  methods: {
+    saveLocale() {
+      ipcRenderer.send("save-locale", this.currentLanguage);
+    },
+    getLocale() {
+      ipcRenderer.send("get-locale");
+      ipcRenderer.on("return-get-locale", (arg) => {
+        console.log(arg);
+      });
+    },
+  },
   computed: {},
 };
 </script>
