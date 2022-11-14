@@ -308,14 +308,13 @@ export default {
   left: 0;
   height: 100%;
   width: 78px;
-  margin-top: 0px;
   background: #11101d;
   padding: 6px 14px;
   transition: all 0.5s ease;
 }
 
 .sidebar.no_windows {
-  margin-top: 36px;
+  margin-top: 34px;
 }
 
 .sidebar.active {

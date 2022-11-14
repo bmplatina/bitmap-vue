@@ -21,8 +21,8 @@
   "viewGameWebsite": "View Website",
   "preview": "Preview",
   "requirements": "Requiremments",
-  "REQ_WIN": "",
-  "REQ_MAC": "",
+  "REQ_WIN": "Windows\nOS: Windows 7 (SP1+) and Windows 10, 64-bit versions only.\nCPU: AMD64 architecture with SSE2 instruction set support\nGPU: DX10, DX11, and DX12-capable GPUs",
+  "REQ_MAC": "Mac\nOS: macOS High Sierra 10.13+\nCPU: AMD64 architecture with SSE2 instruction set support, Apple Silicon\nGPU: Metal-capable Intel and AMD GPUs, Apple Silicon",
 
   "installGame": "Install",
   "store": "Store",
