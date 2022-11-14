@@ -33,6 +33,11 @@
   "cancel": "취소",
   "abort": "중단",
 
+  "application": "애플리케이션",
+  "languageSettings": "언어",
+  "checkUpdate": "업데이트 확인",
+  "requireRestart": "일부 설정은 애플리케이션을 재시작하여야 완전히 적용됩니다.",
+
   "BMPEC_HEADLINE": "총 14만원 상당 상금",
   "BMPEC_TITLE": "2022 비트맵 에디팅 대회",
   "BMPEC_INITIAL": "에디팅 컨테스트"

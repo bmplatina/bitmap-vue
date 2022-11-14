@@ -33,6 +33,11 @@
   "cancel": "Cancel",
   "abort": "Abort",
 
+  "application": "Application",
+  "languageSettings": "Language",
+  "checkUpdate": "Check for updates",
+  "requireRestart": "Some settings will be completely applied after restarting application.",
+
   "BMPEC_HEADLINE": "USD $100 POOL PRIZE",
   "BMPEC_TITLE": "Bitmap Editing Contest 2022",
   "BMPEC_INITIAL": "Editing Contest"

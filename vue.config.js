@@ -1,14 +1,18 @@
-const { defineConfig } = require('@vue/cli-service')
+const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
+  transpileDependencies: true,
   pluginOptions: {
     i18n: {
-      locale: 'en',
-      fallbackLocale: 'en',
-      localeDir: 'locales',
+      locale: "en",
+      fallbackLocale: "en",
+      localeDir: "locales",
       enableLegacy: false,
       runtimeOnly: false,
       compositionOnly: false,
-      fullInstall: true
-    }
-  }
-})
+      fullInstall: true,
+    },
+    electronBuilder: {
+      nodeIntegration: true,
+    },
+  },
+});
