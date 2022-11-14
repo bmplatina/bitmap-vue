@@ -22,14 +22,26 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
 const path_1 = require("path");
 const isDev = __importStar(require("electron-is-dev"));
 const remote = __importStar(require("@electron/remote/main"));
 const autoUpdate = __importStar(require("./updater"));
+const electron_store_1 = __importDefault(require("electron-store"));
 const { TouchBarLabel, TouchBarButton, TouchBarSpacer } = electron_1.TouchBar;
 const isMac = process.platform === "darwin";
+const store = new electron_store_1.default();
+let currentLocale;
+if (store.get("locale")) {
+    currentLocale = store.get("locale");
+}
+else {
+    currentLocale = "en";
+}
 remote.initialize();
 function createWindow() {
     const mainWindow = new electron_1.BrowserWindow({
@@ -88,17 +100,12 @@ function createWindow() {
         });
     }
     // MARK: - Store data from local storage
-    // ipcMain.on("save-locale", (event, arg) => {
-    //   store.set("locale", arg);
-    // });
-    // ipcMain.on("get-locale", (event) => {
-    //   if (store.get("locale")) {
-    //     event.sender.send(store.get("locale"));
-    //   } else {
-    //     store.set("locale", "ko");
-    //     event.sender.send("en");
-    //   }
-    // });
+    electron_1.ipcMain.on("save-locale", (event, arg) => {
+        store.set("locale", arg);
+    });
+    electron_1.ipcMain.on("get-locale", (event) => {
+        event.sender.send(currentLocale);
+    });
     remote.enable(mainWindow.webContents);
 }
 electron_1.app.whenReady().then(() => {

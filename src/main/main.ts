@@ -16,6 +16,13 @@ import Store from "electron-store";
 
 const { TouchBarLabel, TouchBarButton, TouchBarSpacer } = TouchBar;
 const isMac = process.platform === "darwin";
+const store = new Store();
+let currentLocale;
+if (store.get("locale")) {
+  currentLocale = store.get("locale");
+} else {
+  currentLocale = "en";
+}
 remote.initialize();
 
 function createWindow() {
@@ -76,17 +83,12 @@ function createWindow() {
   }
 
   // MARK: - Store data from local storage
-  // ipcMain.on("save-locale", (event, arg) => {
-  //   store.set("locale", arg);
-  // });
-  // ipcMain.on("get-locale", (event) => {
-  //   if (store.get("locale")) {
-  //     event.sender.send(store.get("locale"));
-  //   } else {
-  //     store.set("locale", "ko");
-  //     event.sender.send("en");
-  //   }
-  // });
+  ipcMain.on("save-locale", (event, arg) => {
+    store.set("locale", arg);
+  });
+  ipcMain.on("get-locale", (event) => {
+    event.sender.send(currentLocale);
+  });
 
   remote.enable(mainWindow.webContents);
 }
