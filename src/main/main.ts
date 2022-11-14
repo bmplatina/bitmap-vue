@@ -12,6 +12,7 @@ import { join } from "path";
 import * as isDev from "electron-is-dev";
 import * as remote from "@electron/remote/main";
 import * as autoUpdate from "./updater";
+import Store from "electron-store";
 
 const { TouchBarLabel, TouchBarButton, TouchBarSpacer } = TouchBar;
 const isMac = process.platform === "darwin";
@@ -56,6 +57,37 @@ function createWindow() {
   ipcMain.handle("dark-mode:system", () => {
     nativeTheme.themeSource = "system";
   });
+
+  // MARK: = Minimize, Maximize, Close App
+  if (!isMac) {
+    ipcMain.on("minimizeApp", () => {
+      mainWindow.minimize();
+    });
+    ipcMain.on("maximizeApp", () => {
+      if (mainWindow.isMaximized()) {
+        mainWindow.restore();
+      } else {
+        mainWindow.maximize();
+      }
+    });
+    ipcMain.on("closeApp", () => {
+      mainWindow.close();
+    });
+  }
+
+  // MARK: - Store data from local storage
+  // ipcMain.on("save-locale", (event, arg) => {
+  //   store.set("locale", arg);
+  // });
+  // ipcMain.on("get-locale", (event) => {
+  //   if (store.get("locale")) {
+  //     event.sender.send(store.get("locale"));
+  //   } else {
+  //     store.set("locale", "ko");
+  //     event.sender.send("en");
+  //   }
+  // });
+
   remote.enable(mainWindow.webContents);
 }
 

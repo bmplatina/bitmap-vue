@@ -70,6 +70,35 @@ function createWindow() {
     electron_1.ipcMain.handle("dark-mode:system", () => {
         electron_1.nativeTheme.themeSource = "system";
     });
+    // MARK: = Minimize, Maximize, Close App
+    if (!isMac) {
+        electron_1.ipcMain.on("minimizeApp", () => {
+            mainWindow.minimize();
+        });
+        electron_1.ipcMain.on("maximizeApp", () => {
+            if (mainWindow.isMaximized()) {
+                mainWindow.restore();
+            }
+            else {
+                mainWindow.maximize();
+            }
+        });
+        electron_1.ipcMain.on("closeApp", () => {
+            mainWindow.close();
+        });
+    }
+    // MARK: - Store data from local storage
+    // ipcMain.on("save-locale", (event, arg) => {
+    //   store.set("locale", arg);
+    // });
+    // ipcMain.on("get-locale", (event) => {
+    //   if (store.get("locale")) {
+    //     event.sender.send(store.get("locale"));
+    //   } else {
+    //     store.set("locale", "ko");
+    //     event.sender.send("en");
+    //   }
+    // });
     remote.enable(mainWindow.webContents);
 }
 electron_1.app.whenReady().then(() => {

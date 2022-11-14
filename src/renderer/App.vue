@@ -9,9 +9,8 @@ import Settings from "./components/Settings.vue";
 import Contest from "./components/BMPEC2022.vue";
 </script>
 
-<script defer lang="ts">
+<script lang="ts">
 export default {
-  name: "MenuBar",
   data() {
     return {
       isWin: navigator.platform === "Win32",
@@ -58,7 +57,17 @@ export default {
       },
     };
   },
-  components: {},
+  methods: {
+    minimizeApp() {
+      ipcRenderer.send("minimizeApp");
+    },
+    maximizeApp() {
+      ipcRenderer.send("maximizeApp");
+    },
+    closeApp() {
+      ipcRenderer.send("closeApp");
+    },
+  },
 };
 </script>
 
@@ -75,14 +84,18 @@ export default {
           <button
             class="topBtn minimizeBtn"
             id="minimizeBtn"
-            title="Minimize"
+            @click="minimizeApp"
           ></button>
           <button
             class="topBtn maximizeBtn"
             id="maxResBtn"
-            title="Maximize"
+            @click="maximizeApp"
           ></button>
-          <button class="topBtn closeBtn" id="closeBtn" title="Close"></button>
+          <button
+            class="topBtn closeBtn"
+            id="closeBtn"
+            @click="closeApp"
+          ></button>
         </div>
       </div>
     </div>
