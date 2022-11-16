@@ -31,6 +31,8 @@ const path_1 = require("path");
 const isDev = __importStar(require("electron-is-dev"));
 const remote = __importStar(require("@electron/remote/main"));
 const autoUpdate = __importStar(require("./updater"));
+// import { autoUpdater } from "electron-updater";
+// import log from "electron-log";
 const electron_store_1 = __importDefault(require("electron-store"));
 const { TouchBarLabel, TouchBarButton, TouchBarSpacer } = electron_1.TouchBar;
 const isMac = process.platform === "darwin";
@@ -82,7 +84,7 @@ function createWindow() {
     electron_1.ipcMain.handle("dark-mode:system", () => {
         electron_1.nativeTheme.themeSource = "system";
     });
-    // MARK: = Minimize, Maximize, Close App
+    // MARK: = Minimize, Maximize, Close App when target is not macOS
     if (!isMac) {
         electron_1.ipcMain.on("minimizeApp", () => {
             mainWindow.minimize();
@@ -90,9 +92,11 @@ function createWindow() {
         electron_1.ipcMain.on("maximizeApp", () => {
             if (mainWindow.isMaximized()) {
                 mainWindow.restore();
+                mainWindow.webContents.send("window_restored");
             }
             else {
                 mainWindow.maximize();
+                mainWindow.webContents.send("window_maximized");
             }
         });
         electron_1.ipcMain.on("closeApp", () => {
@@ -106,6 +110,31 @@ function createWindow() {
     electron_1.ipcMain.on("get-locale", (event) => {
         event.sender.send("return-get-locale", currentLocale);
     });
+    // MARK: - Download Assets
+    /* ipcMain.on("download", async (event, { payload }) => {
+      // mainWindow.webContents.downloadURL(payload.url);
+      let properties = payload.properties ? { ...payload.properties } : {};
+      const defaultPath = app.getPath(
+        properties.directory ? properties.directory : "documents"
+      );
+      const defaultFileName = properties.fileName
+        ? properties.fileName
+        : payload.url.split("?")[0].split("/").pop();
+      let customURL = dialog.showSaveDialogSync({
+        defaultPath: `${defaultPath}/${defaultFileName}`,
+      });
+      if (customURL) {
+        let filePathByURL = customURL.split("/");
+        let fileNameByURL = `${filePathByURL.pop()}`;
+        let directory = filePathByURL.join("/");
+        properties = { ...properties, directory, fileNameByURL };
+        await download(BrowserWindow.getFocusedWindow(), payload.url, {
+          ...properties,
+        });
+      } else {
+        // Save Cancelled
+      }
+    }); */
     remote.enable(mainWindow.webContents);
 }
 electron_1.app.whenReady().then(() => {

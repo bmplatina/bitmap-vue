@@ -1,6 +1,7 @@
 import {
   app,
   BrowserWindow,
+  dialog,
   Menu,
   shell,
   globalShortcut,
@@ -12,6 +13,9 @@ import { join } from "path";
 import * as isDev from "electron-is-dev";
 import * as remote from "@electron/remote/main";
 import * as autoUpdate from "./updater";
+import { download } from "electron-dl";
+// import { autoUpdater } from "electron-updater";
+// import log from "electron-log";
 import Store from "electron-store";
 
 const { TouchBarLabel, TouchBarButton, TouchBarSpacer } = TouchBar;
@@ -65,7 +69,7 @@ function createWindow() {
     nativeTheme.themeSource = "system";
   });
 
-  // MARK: = Minimize, Maximize, Close App
+  // MARK: = Minimize, Maximize, Close App when target is not macOS
   if (!isMac) {
     ipcMain.on("minimizeApp", () => {
       mainWindow.minimize();
@@ -73,8 +77,10 @@ function createWindow() {
     ipcMain.on("maximizeApp", () => {
       if (mainWindow.isMaximized()) {
         mainWindow.restore();
+        mainWindow.webContents.send("window_restored");
       } else {
         mainWindow.maximize();
+        mainWindow.webContents.send("window_maximized");
       }
     });
     ipcMain.on("closeApp", () => {
@@ -89,6 +95,32 @@ function createWindow() {
   ipcMain.on("get-locale", (event) => {
     event.sender.send("return-get-locale", currentLocale);
   });
+
+  // MARK: - Download Assets
+  /* ipcMain.on("download", async (event, { payload }) => {
+    // mainWindow.webContents.downloadURL(payload.url);
+    let properties = payload.properties ? { ...payload.properties } : {};
+    const defaultPath = app.getPath(
+      properties.directory ? properties.directory : "documents"
+    );
+    const defaultFileName = properties.fileName
+      ? properties.fileName
+      : payload.url.split("?")[0].split("/").pop();
+    let customURL = dialog.showSaveDialogSync({
+      defaultPath: `${defaultPath}/${defaultFileName}`,
+    });
+    if (customURL) {
+      let filePathByURL = customURL.split("/");
+      let fileNameByURL = `${filePathByURL.pop()}`;
+      let directory = filePathByURL.join("/");
+      properties = { ...properties, directory, fileNameByURL };
+      await download(BrowserWindow.getFocusedWindow(), payload.url, {
+        ...properties,
+      });
+    } else {
+      // Save Cancelled
+    }
+  }); */
 
   remote.enable(mainWindow.webContents);
 }

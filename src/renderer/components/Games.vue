@@ -217,7 +217,7 @@
 </template>
 <script defer lang="ts">
 import { response } from "express";
-import { gameAPI } from "../electron";
+import { gameAPI, ipcRenderer } from "../electron";
 
 export default {
   data() {
@@ -258,7 +258,19 @@ export default {
       .then((response) => (this.games = response.data.games))
       .catch((error) => console.log(error));
   },
-  computed: {},
+  methods: {
+    downloadGame(url: String, fileName: String, directory: String) {
+      ipcRenderer.send("download", {
+        payload: {
+          url,
+          properties: {
+            fileName,
+            directory,
+          },
+        },
+      });
+    },
+  },
 };
 </script>
 

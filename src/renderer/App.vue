@@ -14,6 +14,7 @@ export default {
   data() {
     return {
       isWin: navigator.platform === "Win32",
+      isFullScreen: false,
       isActive: false,
       selectedMenu: 0,
       storeString: this.$t("store"),
@@ -63,6 +64,12 @@ export default {
     },
     maximizeApp() {
       ipcRenderer.send("maximizeApp");
+      ipcRenderer.on("window_restored", () => {
+        this.isFullScreen = false;
+      });
+      ipcRenderer.on("window_maximized", () => {
+        this.isFullScreen = true;
+      });
     },
     closeApp() {
       ipcRenderer.send("closeApp");
@@ -76,7 +83,10 @@ export default {
     <!-- menuBar -->
     <div class="menuBar">
       <div class="topBar">
-        <div class="titleBar" :class="{ is_windows_or_fullscreen: isWin }">
+        <div
+          class="titleBar"
+          :class="{ is_windows_or_fullscreen: isWin || isFullScreen }"
+        >
           <img src="./components/assets/BitmapESD.png" id="bmp_img" />
           <div class="title">{{ $t("bitmapTitle") }}</div>
         </div>
