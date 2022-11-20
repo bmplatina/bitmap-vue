@@ -27,7 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
-const path_1 = require("path");
+const path = __importStar(require("path"));
 const isDev = __importStar(require("electron-is-dev"));
 const remote = __importStar(require("@electron/remote/main"));
 const autoUpdate = __importStar(require("./updater"));
@@ -35,18 +35,27 @@ const autoUpdate = __importStar(require("./updater"));
 // import log from "electron-log";
 const electron_store_1 = __importDefault(require("electron-store"));
 const { TouchBarLabel, TouchBarButton, TouchBarSpacer } = electron_1.TouchBar;
-const isMac = process.platform === "darwin";
-const store = new electron_store_1.default();
-let currentLocale;
+const isMac = process.platform === "darwin", store = new electron_store_1.default();
+let currentLocale, mainWindow;
 if (store.get("locale")) {
     currentLocale = store.get("locale");
 }
 else {
     currentLocale = "en";
 }
+if (process.defaultApp) {
+    if (process.argv.length >= 2) {
+        electron_1.app.setAsDefaultProtocolClient("bitmap-esd", process.execPath, [
+            path.resolve(process.argv[1]),
+        ]);
+    }
+}
+else {
+    electron_1.app.setAsDefaultProtocolClient("bitmmap-esd");
+}
 remote.initialize();
 function createWindow() {
-    const mainWindow = new electron_1.BrowserWindow({
+    mainWindow = new electron_1.BrowserWindow({
         width: 1600,
         height: 900,
         minWidth: 1000,
@@ -57,7 +66,7 @@ function createWindow() {
         frame: isMac,
         title: "Bitmap",
         webPreferences: {
-            preload: (0, path_1.join)(__dirname, "preload.js"),
+            preload: path.join(__dirname, "preload.js"),
             nodeIntegration: true,
             contextIsolation: true,
             webviewTag: true,
@@ -69,8 +78,28 @@ function createWindow() {
         mainWindow.loadURL(`http://localhost:${rendererPort}`);
     }
     else {
-        mainWindow.loadFile((0, path_1.join)(electron_1.app.getAppPath(), "renderer", "index.html"));
+        mainWindow.loadFile(path.join(electron_1.app.getAppPath(), "renderer", "index.html"));
     }
+    // MARK: - Deep Link
+    // Windows
+    const gotTheLock = electron_1.app.requestSingleInstanceLock();
+    if (!gotTheLock) {
+        electron_1.app.quit();
+    }
+    else {
+        electron_1.app.on("second-instance", (event, commandLine, workingDirectory) => {
+            if (mainWindow) {
+                if (mainWindow.isMinimized()) {
+                    mainWindow.restore();
+                }
+                mainWindow.focus();
+            }
+        });
+    }
+    // macOS, Linux
+    electron_1.app.on("open-url", (event, url) => {
+        electron_1.dialog.showErrorBox("Welcome Back", "You arrived from ${url}");
+    });
     // MARK: - Dark, Light Mode
     electron_1.ipcMain.handle("dark-mode:toggle", () => {
         if (electron_1.nativeTheme.shouldUseDarkColors) {

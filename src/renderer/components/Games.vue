@@ -1,3 +1,9 @@
+<!-- <script setup lang="ts">
+defineProps<{
+  dialogue: String;
+}>();
+</script> -->
+
 <template>
   <div style="padding: 20px">
     <header>
@@ -215,7 +221,9 @@
     </a>
   </footer>
 </template>
+
 <script defer lang="ts">
+import { dialog } from "electron";
 import { response } from "express";
 import { gameAPI, ipcRenderer } from "../electron";
 

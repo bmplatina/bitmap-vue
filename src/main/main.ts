@@ -9,7 +9,7 @@ import {
   nativeTheme,
   TouchBar,
 } from "electron";
-import { join } from "path";
+import * as path from "path";
 import * as isDev from "electron-is-dev";
 import * as remote from "@electron/remote/main";
 import * as autoUpdate from "./updater";
@@ -19,18 +19,30 @@ import { download } from "electron-dl";
 import Store from "electron-store";
 
 const { TouchBarLabel, TouchBarButton, TouchBarSpacer } = TouchBar;
-const isMac = process.platform === "darwin";
-const store = new Store();
-let currentLocale;
+const isMac = process.platform === "darwin",
+  store = new Store();
+let currentLocale, mainWindow;
+
 if (store.get("locale")) {
   currentLocale = store.get("locale");
 } else {
   currentLocale = "en";
 }
+
+if (process.defaultApp) {
+  if (process.argv.length >= 2) {
+    app.setAsDefaultProtocolClient("bitmap-esd", process.execPath, [
+      path.resolve(process.argv[1]),
+    ]);
+  }
+} else {
+  app.setAsDefaultProtocolClient("bitmmap-esd");
+}
+
 remote.initialize();
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1600,
     height: 900,
     minWidth: 1000,
@@ -41,7 +53,7 @@ function createWindow() {
     frame: isMac,
     title: "Bitmap",
     webPreferences: {
-      preload: join(__dirname, "preload.js"),
+      preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: true,
       webviewTag: true,
@@ -53,8 +65,28 @@ function createWindow() {
     const rendererPort = process.argv[2];
     mainWindow.loadURL(`http://localhost:${rendererPort}`);
   } else {
-    mainWindow.loadFile(join(app.getAppPath(), "renderer", "index.html"));
+    mainWindow.loadFile(path.join(app.getAppPath(), "renderer", "index.html"));
   }
+
+  // MARK: - Deep Link
+  // Windows
+  const gotTheLock = app.requestSingleInstanceLock();
+  if (!gotTheLock) {
+    app.quit();
+  } else {
+    app.on("second-instance", (event, commandLine, workingDirectory) => {
+      if (mainWindow) {
+        if (mainWindow.isMinimized()) {
+          mainWindow.restore();
+        }
+        mainWindow.focus();
+      }
+    });
+  }
+  // macOS, Linux
+  app.on("open-url", (event, url) => {
+    dialog.showErrorBox("Welcome Back", "You arrived from ${url}");
+  });
 
   // MARK: - Dark, Light Mode
   ipcMain.handle("dark-mode:toggle", () => {
