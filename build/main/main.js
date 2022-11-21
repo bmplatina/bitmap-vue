@@ -36,7 +36,7 @@ const autoUpdate = __importStar(require("./updater"));
 const electron_store_1 = __importDefault(require("electron-store"));
 const { TouchBarLabel, TouchBarButton, TouchBarSpacer } = electron_1.TouchBar;
 const isMac = process.platform === "darwin", store = new electron_store_1.default();
-let currentLocale, mainWindow;
+let currentLocale, mainWindow, childWindow;
 if (store.get("locale")) {
     currentLocale = store.get("locale");
 }
@@ -72,6 +72,10 @@ function createWindow() {
             webviewTag: true,
             devTools: isDev,
         },
+    });
+    childWindow = new electron_1.BrowserWindow({
+        parent: mainWindow,
+        show: false
     });
     if (process.env.NODE_ENV === "development") {
         const rendererPort = process.argv[2];

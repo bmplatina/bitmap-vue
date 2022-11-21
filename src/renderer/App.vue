@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ipcRenderer } from "./electron";
+import { RouterLink, RouterView } from "vue-router";
 
 import Games from "./components/Games.vue";
 import ProjectFiles from "./components/ProjectFiles.vue";
@@ -7,6 +8,7 @@ import Library from "./components/Library.vue";
 import User from "./components/User.vue";
 import Settings from "./components/Settings.vue";
 import Contest from "./components/BMPEC2022.vue";
+import WebView from "./components/WebView.vue";
 </script>
 
 <script lang="ts">
@@ -134,7 +136,6 @@ export default {
         </li>
         <li></li>
         <li v-for="(menuElements, index) in menu" :key="index">
-          <!-- <a href="#" target="_blank"> -->
           <a v-on:click="selectedMenu = index">
             <i class="bx" :class="`${menuLogo[index]}`"></i>
             <span class="links_name" style="white-space: nowrap">{{
@@ -161,23 +162,15 @@ export default {
     </div>
     <div class="home_content">
       <!-- Main, Wiki -->
-      <webview
-        src="http://prodbybitmap.com/"
-        style="width: 100%; height: 100%"
-        v-if="selectedMenu == 0"
-      ></webview>
-      <!-- Newsroom -->
-      <webview
-        src="http://prodbybitmap.com/commission/bitmap_notices/"
-        style="width: 100%; height: 100%"
+      <WebView link="http://prodbybitmap.com/" v-if="selectedMenu == 0" />
+      <WebView
+        link="http://prodbybitmap.com/commission/bitmap_notices/"
         v-if="selectedMenu == 1"
-      ></webview>
-      <!-- Blog -->
-      <webview
-        src="http://prodbybitmap.com/commission/blog/"
-        style="width: 100%; height: 100%"
+      />
+      <WebView
+        link="http://prodbybitmap.com/commission/blog"
         v-if="selectedMenu == 2"
-      ></webview>
+      />
       <ProjectFiles v-if="selectedMenu == 3" />
       <Games v-if="selectedMenu == 4" />
       <Library v-if="selectedMenu == 5" />

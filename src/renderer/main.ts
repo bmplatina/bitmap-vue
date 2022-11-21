@@ -1,5 +1,6 @@
 import { createApp } from "vue";
-import VueHead from "vue-head";
+import { createPinia } from "pinia";
+import router from "./router";
 import App from "./App.vue";
 
 /* i18n Settings */
@@ -33,4 +34,8 @@ const i18n = createI18n({
 
 const app = createApp(App);
 
-app.component("font-awesome-icon", FontAwesomeIcon).use(i18n).mount("#app");
+app.component("font-awesome-icon", FontAwesomeIcon);
+app.use(i18n);
+app.use(createPinia());
+app.use(router);
+app.mount("#app");

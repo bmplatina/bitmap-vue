@@ -21,7 +21,7 @@ import Store from "electron-store";
 const { TouchBarLabel, TouchBarButton, TouchBarSpacer } = TouchBar;
 const isMac = process.platform === "darwin",
   store = new Store();
-let currentLocale, mainWindow;
+let currentLocale, mainWindow, childWindow;
 
 if (store.get("locale")) {
   currentLocale = store.get("locale");
@@ -61,6 +61,10 @@ function createWindow() {
     },
   });
 
+  childWindow = new BrowserWindow({
+    parent: mainWindow,
+    show: false
+  })
   if (process.env.NODE_ENV === "development") {
     const rendererPort = process.argv[2];
     mainWindow.loadURL(`http://localhost:${rendererPort}`);
