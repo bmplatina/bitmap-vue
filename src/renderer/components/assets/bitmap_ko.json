@@ -23,6 +23,8 @@
   "requirements": "요구 사항",
   "REQ_WIN": "OS: 64비트 Windows 7 서비스 팩 1 및 Windows 10 이상\nCPU: SSE2 명령어를 지원하는 AMD64 CPU\nGPU: DirectX 10, 11, 12 지원 GPU",
   "REQ_MAC": "OS: macOS High Sierra 10.13 이상\nCPU: SSE2 명령어를 지원하는 AMD64 CPU 또는 Apple Silicon\nGPU: Metal 지원 Intel 및 AMD GPU 또는 Apple Silicon",
+  "UNSUPPORTED_PLATFORM": "지원하지 않는 플랫폼",
+  "FORCE_INSTALL_UNSUPPORTED_PLATFORM_MAC": "은(는) Mac을 지원하지 않습니다. iOS 게임의 경우 Apple Silicon Mac을 사용하거나 Windows 또는 Android 게임의 경우 에뮬레이터가 설치되었다면 이 게임을 플레이할 수도 있습니다. 설치하시겠습니까?",
 
   "installGame": "설치",
   "store": "스토어",

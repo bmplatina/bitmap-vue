@@ -23,6 +23,8 @@
   "requirements": "Requiremments",
   "REQ_WIN": "Windows\nOS: Windows 7 (SP1+) and Windows 10, 64-bit versions only.\nCPU: AMD64 architecture with SSE2 instruction set support\nGPU: DX10, DX11, and DX12-capable GPUs",
   "REQ_MAC": "Mac\nOS: macOS High Sierra 10.13+\nCPU: AMD64 architecture with SSE2 instruction set support, Apple Silicon\nGPU: Metal-capable Intel and AMD GPUs, Apple Silicon",
+  "UNSUPPORTED_PLATFORM": "Unsupported Platform",
+  "FORCE_INSTALL_UNSUPPORTED_PLATFORM_MAC": " is not playable for Mac. But in case, if you are using Apple Silicon Mac for iOS support, or have emulator installed for Windows and Android support, you may play this game. Do you want to install anyway?",
 
   "installGame": "Install",
   "store": "Store",
