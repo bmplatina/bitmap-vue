@@ -19,6 +19,7 @@ export default {
       isFullScreen: false,
       isActive: false,
       selectedMenu: 0,
+      placeHolder: "",
       storeString: this.$t("store"),
       bmpecString: this.$t("BMPEC_INITIAL"),
       menu: [
@@ -163,6 +164,7 @@ export default {
     <div class="home_content">
       <!-- Main, Wiki -->
       <WebView link="http://prodbybitmap.com/" v-if="selectedMenu == 0" />
+      <!-- <WebView link="" v-if="placeHolder"/> -->
       <WebView
         link="http://prodbybitmap.com/commission/bitmap_notices/"
         v-if="selectedMenu == 1"

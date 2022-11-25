@@ -233,6 +233,7 @@ export default {
       gameModal: -1,
       isGameInstalled: [false],
       isGameInstalling: [false],
+      overridePlatform: [false, false, false],
       gameInstallPercentage: [0.0],
       installedGameVersion: [1.0],
       games: [
@@ -266,6 +267,27 @@ export default {
       .then((response) => (this.games = response.data.games))
       .catch((error) => console.log(error));
   },
+  computed: {
+    checkPlatform() {
+      if (process.platform == "darwin") {
+        // If macOS
+        if (this.games[this.gameModal].gamePlatformMac) {
+          return true;
+        } else if (this.games[this.gameModal].gamePlatformWindows) {
+          return false;
+        }
+      } else if (process.platform == "win32") {
+        // If Windows
+        if (this.games[this.gameModal].gamePlatformWindows) {
+          return true;
+        } else if (this.games[this.gameModal].gamePlatformMac) {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    },
+  },
   methods: {
     downloadGame(url: String, fileName: String, directory: String) {
       ipcRenderer.send("download", {
@@ -278,6 +300,26 @@ export default {
         },
       });
     },
+    // platformOverrideDialog() {
+    //   dialog
+    //     .showMessageBox({
+    //       type: "question",
+    //       buttons: [this.$t("cancel"), this.$t("ok")],
+    //       defaultId: 1,
+    //       title: this.$t("UNSUPPORTED_PLATFORM"),
+    //       message: this.$t("UNSUPPORTED_PLATFORM"),
+    //       detail: this.$t("FORCE_INSTALL_UNSUPPORTED_PLATFORM_MAC"),
+    //       cancelId: 0,
+    //       noLink: false,
+    //       normalizeAccessKeys: false,
+    //     })
+    //     .then((box) => {
+    //       console.log("Button Clicked Index - ", box.response);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
   },
 };
 </script>
