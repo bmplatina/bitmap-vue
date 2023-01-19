@@ -1,8 +1,8 @@
-<!-- <script setup lang="ts">
-defineProps<{
-  dialogue: String;
-}>();
-</script> -->
+<script setup lang="ts">
+import { dialog } from "electron";
+import { response } from "express";
+import GameInfo from "./GameInfo.vue";
+</script>
 
 <template>
   <div style="padding: 20px">
@@ -55,7 +55,11 @@ defineProps<{
         </a>
       </td>
     </table>
-    <button class="dark-bg" v-if="gameModal > -1" @click="gameModal = -1">
+    <transition name="slide" class="transition-position">
+      <GameInfo :gameInfo="games[gameModal]" v-show="gameModal > -1" />
+    </transition>
+
+    <!-- <button class="dark-bg" v-if="gameModal > -1" @click="gameModal = -1">
       <div class="white-fg game-view" v-show="gameModal > -1">
         <div class="game-modal">
           <h3 style="padding: 10px">
@@ -209,7 +213,7 @@ defineProps<{
           </div>
         </div>
       </div>
-    </button>
+    </button> -->
   </div>
   <footer>
     <a
@@ -223,29 +227,35 @@ defineProps<{
 </template>
 
 <script defer lang="ts">
-import { dialog } from "electron";
-import { response } from "express";
 import { gameAPI, ipcRenderer } from "../electron";
-
 export default {
   data() {
     return {
       gameModal: -1,
-      isGameInstalled: [false],
-      isGameInstalling: [false],
-      overridePlatform: [false, false, false],
-      gameInstallPercentage: [0.0],
-      installedGameVersion: [1.0],
       games: [
         {
           gameTitle: "",
+          gameVersion: 1.0,
           gamePlatformWindows: false,
           gamePlatformMac: false,
           gamePlatformMobile: false,
+          gameEngine: "",
           gameGenre: "",
           gameDeveloper: "",
           gamePublisher: "",
+          isEarlyAccess: false,
+          isReleased: false,
+          gameReleasedDate: "",
+          gameWebsite: "",
+          gameVideoURL: "",
+          gameDownloadMacURL: "",
+          gameDownloadWinURL: "",
+          gameLogoURL: "",
+          gameBannerURL: "",
           gamePosterURL: "",
+          gameBinaryName: "",
+          gameHeadline: "",
+          gameDescription: "",
         },
       ],
     };
@@ -254,60 +264,6 @@ export default {
     gameAPI()
       .then((response) => (this.games = response.data.games))
       .catch((error) => console.log(error));
-  },
-  computed: {
-    checkPlatform() {
-      if (process.platform == "darwin") {
-        // If macOS
-        if (this.games[this.gameModal].gamePlatformMac) {
-          return true;
-        } else if (this.games[this.gameModal].gamePlatformWindows) {
-          return false;
-        }
-      } else if (process.platform == "win32") {
-        // If Windows
-        if (this.games[this.gameModal].gamePlatformWindows) {
-          return true;
-        } else if (this.games[this.gameModal].gamePlatformMac) {
-          return false;
-        }
-      } else {
-        return false;
-      }
-    },
-  },
-  methods: {
-    downloadGame(url: String, fileName: String, directory: String) {
-      ipcRenderer.send("download", {
-        payload: {
-          url,
-          properties: {
-            fileName,
-            directory,
-          },
-        },
-      });
-    },
-    // platformOverrideDialog() {
-    //   dialog
-    //     .showMessageBox({
-    //       type: "question",
-    //       buttons: [this.$t("cancel"), this.$t("ok")],
-    //       defaultId: 1,
-    //       title: this.$t("UNSUPPORTED_PLATFORM"),
-    //       message: this.$t("UNSUPPORTED_PLATFORM"),
-    //       detail: this.$t("FORCE_INSTALL_UNSUPPORTED_PLATFORM_MAC"),
-    //       cancelId: 0,
-    //       noLink: false,
-    //       normalizeAccessKeys: false,
-    //     })
-    //     .then((box) => {
-    //       console.log("Button Clicked Index - ", box.response);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
   },
 };
 </script>
@@ -374,72 +330,23 @@ footer .submit-games {
 footer .submit-button:hover {
   background: #4caf5d;
 }
-.dark-bg {
-  width: 100%;
-  height: 100%;
+.transition-position {
   position: absolute;
-  left: 0;
   top: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
-  padding: 20px;
-  border: none;
 }
-.white-fg {
-  position: relative;
-  background: #fff;
-  border-radius: 12px;
+.slide-enter-from {
+  opacity: 0;
+  margin-left: 100%;
+  margin-right: -100%;
+  filter: drop-shadow(0px 0px 12px #000);
 }
-.white-fg.game-view {
-  width: 90%;
-  height: 90%;
-  padding: 10px;
+.slide-enter-active {
+  transition: all 0.75s ease;
 }
-.white-fg webview {
-  width: 100%;
-  height: 96%;
-}
-.game-modal {
-  width: 100%;
-  max-height: 100%;
-  overflow-y: auto;
-}
-.modal-container {
-  background: #485163;
-  color: #000;
-  border-radius: 24px;
-  margin-bottom: 24px;
-}
-@media (prefers-color-scheme: dark) {
-  .white-fg.game-view {
-    background: #2c313c;
-    color: white;
-  }
-  .text-color {
-    color: #fff;
-  }
-  .platform.modal {
-    height: 22px;
-    filter: contrast(0%) brightness(200%);
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  .white-fg.game-view {
-    background: #5d677e;
-    color: white;
-  }
-  .text-color {
-    color: #000;
-  }
-  .platform.modal {
-    height: 22px;
-    filter: contrast(0%) brightness(0%);
-  }
+.slide-enter-to {
+  opacity: 1;
+  margin-left: 0%;
+  margin-right: 0%;
+  filter: drop-shadow(0px 0px 0px #000);
 }
 </style>
