@@ -8,7 +8,7 @@ import axios from "axios";
 const ipcRenderer = window.electron.ipcRenderer as IpcRenderer;
 
 const config = {
-  gameJsonURL: "http://api.prodbybitmap.com/games/game.json",
+  gameJsonURL: "http://api.prodbybitmap.com/games/game_pretest.json",
   projectFileJsonURL: "",
 };
 

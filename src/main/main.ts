@@ -105,7 +105,7 @@ function createWindow() {
     nativeTheme.themeSource = "system";
   });
 
-  // MARK: = Minimize, Maximize, Close App when target is not macOS
+  // MARK: - Minimize, Maximize, Close App when target is not macOS
   if (!isMac) {
     ipcMain.on("minimizeApp", () => {
       mainWindow.minimize();

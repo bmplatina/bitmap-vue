@@ -15,7 +15,7 @@ defineProps<{
         <a class="game-thumbnails" @click="gameModal = index">
           <img
             class="game-images"
-            :src="item.gameImageURL"
+            :src="item.gamePosterURL"
             :alt="item.gameTitle"
           />
           <div class="game-dialogue">
@@ -67,7 +67,7 @@ defineProps<{
             <center>
               <img
                 class="game-images"
-                :src="games[gameModal].gameImageURL"
+                :src="games[gameModal].gamePosterURL"
                 :alt="games[gameModal].gameTitle"
               />
               <h1 class="text-color">{{ games[gameModal].gameTitle }}</h1>
@@ -254,7 +254,9 @@ export default {
           gameVideoURL: "",
           gameDownloadMacURL: "",
           gameDownloadWinURL: "",
-          gameImageURL: "",
+          gameLogoURL: "",
+          gameBannerURL: "",
+          gamePosterURL: "",
           gameBinaryName: "",
           gameHeadline: "",
           gameDescription: "",

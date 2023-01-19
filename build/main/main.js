@@ -117,7 +117,7 @@ function createWindow() {
     electron_1.ipcMain.handle("dark-mode:system", () => {
         electron_1.nativeTheme.themeSource = "system";
     });
-    // MARK: = Minimize, Maximize, Close App when target is not macOS
+    // MARK: - Minimize, Maximize, Close App when target is not macOS
     if (!isMac) {
         electron_1.ipcMain.on("minimizeApp", () => {
             mainWindow.minimize();
