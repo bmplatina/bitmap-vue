@@ -9,6 +9,14 @@ import GameInfo from "./GameInfo.vue";
     <header>
       <h1>{{ $t("games") }}</h1>
     </header>
+    <a
+      href="#"
+      class="exit-modal"
+      v-if="gameModal > -1"
+      @click="gameModal = -1"
+    >
+      <font-awesome-icon icon="fa-solid fa-x" />
+    </a>
     <div class="title"></div>
     <table class="lists">
       <td v-for="(item, index) in games" :key="index" style="padding: 15px">
@@ -312,6 +320,21 @@ export default {
 .game-info {
   text-shadow: 0px 0px 12px #000;
 }
+.exit-modal {
+  position: fixed;
+  right: 25px;
+  top: 50px;
+  padding: 5px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+
+  color: white;
+  background: #4188f1;
+  border: none;
+  outline: none;
+  box-shadow: 0px 0px 20px #000;
+}
 footer .submit-games {
   position: fixed;
   right: 25px;
@@ -326,9 +349,6 @@ footer .submit-games {
   border: none;
   outline: none;
   box-shadow: 0px 0px 20px #000;
-}
-footer .submit-button:hover {
-  background: #4caf5d;
 }
 .transition-position {
   position: absolute;
