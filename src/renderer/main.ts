@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import { getAnalytics, firebaseConfig, initializeApp } from "./firebase-sdk";
 import router from "./router";
 import App from "./App.vue";
 
@@ -31,6 +32,10 @@ const i18n = createI18n({
     ko: bitmapKorean,
   },
 });
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+getAnalytics(initializeApp(firebaseConfig));
 
 const app = createApp(App);
 
