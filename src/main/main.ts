@@ -13,7 +13,11 @@ import * as path from "path";
 import * as isDev from "electron-is-dev";
 import * as remote from "@electron/remote/main";
 import * as autoUpdate from "./updater";
-import { download } from "electron-dl";
+// import { download } from "electron-dl";
+import * as fs from "fs";
+import * as axios from "axios";
+import * as AdmZip from "adm-zip";
+
 // import { autoUpdater } from "electron-updater";
 // import log from "electron-log";
 import Store from "electron-store";
@@ -63,8 +67,8 @@ function createWindow() {
 
   childWindow = new BrowserWindow({
     parent: mainWindow,
-    show: false
-  })
+    show: false,
+  });
   if (process.env.NODE_ENV === "development") {
     const rendererPort = process.argv[2];
     mainWindow.loadURL(`http://localhost:${rendererPort}`);

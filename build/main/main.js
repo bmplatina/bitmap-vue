@@ -75,7 +75,7 @@ function createWindow() {
     });
     childWindow = new electron_1.BrowserWindow({
         parent: mainWindow,
-        show: false
+        show: false,
     });
     if (process.env.NODE_ENV === "development") {
         const rendererPort = process.argv[2];
