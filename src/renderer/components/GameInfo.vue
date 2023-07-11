@@ -14,42 +14,42 @@
             :alt="gameInfo.gameTitle"
           />
           <h1 class="text-color">{{ gameInfo.gameTitle }}</h1>
-          <!-- <div class="install-btns">
+          <div class="install-btns">
+            <button
+              class="install-interactions"
+              v-if="!isGameInstalled[gameIndex]"
+            >
+              {{ $t("installGame") }}
+            </button>
+            <div v-else-if="isGameInstalled[gameIndex]">
               <button
-                class="install-interactions"
-                v-if="!isGameInstalled[gameIndex]"
+                class="install-interactions update"
+                v-if="installedGameVersion[gameIndex] < gameInfo.gameVersion"
               >
-                {{ $t("installGame") }}
+                {{ $t("update") }}
               </button>
-              <div v-else-if="isGameInstalled[gameIndex]">
-                <button
-                  class="install-interactions update"
-                  v-if="installedGameVersion[gameIndex] < gameInfo.gameVersion"
-                >
-                  {{ $t("update") }}
-                </button>
-                <button class="install-interactions open">
-                  {{ $t("runGame") }}
-                </button>
+              <button class="install-interactions open">
+                {{ $t("runGame") }}
+              </button>
+              <button class="install-interactions remove">
+                {{ $t("remove") }}
+              </button>
+              <div
+                class="installing-progress"
+                v-if="isGameInstalling[gameIndex]"
+              >
+                <hr size="0.5px" style="padding: 2px" />
+                <progress
+                  :value="gameInstallPercentage[gameIndex]"
+                  max="100"
+                  id="downloadProgress"
+                ></progress>
                 <button class="install-interactions remove">
-                  {{ $t("remove") }}
+                  {{ $t("cancel") }}
                 </button>
-                <div
-                  class="installing-progress"
-                  v-if="isGameInstalling[gameIndex]"
-                >
-                  <hr size="0.5px" style="padding: 2px" />
-                  <progress
-                    :value="gameInstallPercentage[gameIndex]"
-                    max="100"
-                    id="downloadProgress"
-                  ></progress>
-                  <button class="install-interactions remove">
-                    {{ $t("cancel") }}
-                  </button>
-                </div>
               </div>
-            </div> -->
+            </div>
+          </div>
         </center>
       </div>
       <div style="float: right; width: 66%">
@@ -144,7 +144,7 @@
 </template>
 
 <script lang="ts">
-import { ipcRenderer } from "../electron";
+import { ipcRenderer, dialog } from "../electron";
 
 export default {
   props: {
@@ -180,6 +180,8 @@ export default {
   },
   data() {
     return {
+      gameMacURL: this.gameInfo.gameDownloadMacURL,
+      gameWinURL: this.gameInfo.gameDownloadWinURL,
       isGameInstalled: false,
       isGameInstalling: false,
       overridePlatform: false,
@@ -209,16 +211,44 @@ export default {
     },
   },
   methods: {
-    downloadGame(url: String, fileName: String, directory: String) {
-      ipcRenderer.send("download", {
-        payload: {
+    openFileExplorer() {
+      dialog
+        .showOpenDialog({
+          properties: ["openDirectory"],
+        })
+        .then((result) => {
+          const selectedDirectory = result.filePaths[0];
+          switch (process.platform) {
+            case "darwin":
+              this.executeDownloadAndExtract(
+                this.gameMacURL,
+                selectedDirectory
+              );
+              break;
+            case "win32":
+              this.executeDownloadAndExtract(
+                this.gameWinURL,
+                selectedDirectory
+              );
+              break;
+          }
+        })
+        .catch((err) => {
+          console.error("파일 탐색기 오류", err);
+        });
+    },
+
+    async executeDownloadAndExtract(url: string, targetPath: string) {
+      try {
+        const response = await ipcRenderer.invoke("downloadAndExtract", {
           url,
-          properties: {
-            fileName,
-            directory,
-          },
-        },
-      });
+          targetPath,
+        });
+        return response;
+      } catch (error) {
+        console.error("다운로드 및 압축해제 오류: ", error);
+        return false;
+      }
     },
   },
 };

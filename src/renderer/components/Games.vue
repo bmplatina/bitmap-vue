@@ -79,7 +79,7 @@ import GameInfo from "./GameInfo.vue";
 </template>
 
 <script defer lang="ts">
-import { gameAPI, ipcRenderer } from "../electron";
+import { gameAPI } from "../electron";
 
 export default {
   data() {
