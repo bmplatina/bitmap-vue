@@ -31,6 +31,10 @@ const path = __importStar(require("path"));
 const isDev = __importStar(require("electron-is-dev"));
 const remote = __importStar(require("@electron/remote/main"));
 const autoUpdate = __importStar(require("./updater"));
+// import { download } from "electron-dl";
+const fs = __importStar(require("fs"));
+const axios_1 = __importDefault(require("axios"));
+const AdmZip = __importStar(require("adm-zip"));
 // import { autoUpdater } from "electron-updater";
 // import log from "electron-log";
 const electron_store_1 = __importDefault(require("electron-store"));
@@ -52,6 +56,25 @@ if (process.defaultApp) {
 }
 else {
     electron_1.app.setAsDefaultProtocolClient("bitmmap-esd");
+}
+async function downloadAndExtractZip(url, targetPath) {
+    const zipFilePath = path.join(targetPath, "temp.zip"); // 임시 zip 파일 경로
+    // 파일 다운로드
+    const response = await (0, axios_1.default)({
+        url: url,
+        responseType: "stream",
+    });
+    const writer = fs.createWriteStream(zipFilePath);
+    response.data.pipe(writer);
+    await new Promise((resolve, reject) => {
+        writer.on("finish", resolve);
+        writer.on("error", reject);
+    });
+    // 압축 해제
+    const zip = new AdmZip(zipFilePath);
+    zip.extractAllTo(targetPath, true);
+    // 임시 zip 파일 삭제
+    fs.unlinkSync(zipFilePath);
 }
 remote.initialize();
 function createWindow() {
@@ -144,6 +167,16 @@ function createWindow() {
         event.sender.send("return-get-locale", currentLocale);
     });
     // MARK: - Download Assets
+    electron_1.ipcMain.on("downloadAndExtract", async (event, { url, targetPath }) => {
+        try {
+            await downloadAndExtractZip(url, targetPath);
+            event.reply("downloadAndExtractComplete", true);
+        }
+        catch (error) {
+            console.error("다운로드 및 압축 해제 오류: ", error);
+            event.reply("downloadAndExtractComplete", false);
+        }
+    });
     /* ipcMain.on("download", async (event, { payload }) => {
       // mainWindow.webContents.downloadURL(payload.url);
       let properties = payload.properties ? { ...payload.properties } : {};

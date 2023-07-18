@@ -8,11 +8,7 @@
       <hr size="0.5px" style="padding: 2px" />
       <div style="float: left; width: 34%; margin-top: 3%">
         <center>
-          <img
-            class="game-images"
-            :src="gameInfo.gamePosterURL"
-            :alt="gameInfo.gameTitle"
-          />
+          <img class="game-images" :src="gameInfo.gamePosterURL" :alt="gameInfo.gameTitle" />
           <h1 class="text-color">{{ gameInfo.gameTitle }}</h1>
           <!-- <div class="install-btns">
               <button
@@ -58,30 +54,13 @@
           <h3 class="text-color" v-show="gameInfo.isEarlyAccess">
             {{ $t("earlyAccess") }}
           </h3>
-          <img
-            class="platform modal"
-            src="./assets/platformWindows11.png"
-            alt="Windows"
-            v-show="gameInfo.gamePlatformWindows"
-          />
-          <img
-            class="platform modal"
-            src="./assets/platformMac.png"
-            alt="macOS"
-            v-show="gameInfo.gamePlatformMac"
-          />
-          <img
-            class="platform modal"
-            src="./assets/platformAndroid.png"
-            alt="Android"
-            v-show="gameInfo.gamePlatformMobile"
-          />
-          <img
-            class="platform modal"
-            src="./assets/platformIOS.png"
-            alt="iOS, iPadOS"
-            v-show="gameInfo.gamePlatformMobile"
-          />
+          <img class="platform modal" src="./assets/platformWindows11.png" alt="Windows"
+            v-show="gameInfo.gamePlatformWindows" />
+          <img class="platform modal" src="./assets/platformMac.png" alt="macOS" v-show="gameInfo.gamePlatformMac" />
+          <img class="platform modal" src="./assets/platformAndroid.png" alt="Android"
+            v-show="gameInfo.gamePlatformMobile" />
+          <img class="platform modal" src="./assets/platformIOS.png" alt="iOS, iPadOS"
+            v-show="gameInfo.gamePlatformMobile" />
           <p class="text-color">
             {{ $t("releasedDate") }}{{ gameInfo.gameReleasedDate }}
           </p>
@@ -102,10 +81,8 @@
           <h1 class="text-color">{{ $t("preview") }}</h1>
           <hr size="0.5px" style="padding: 2px" />
           <center>
-            <webview
-              :src="'https://www.youtube.com/embed/' + gameInfo.gameVideoURL"
-              style="width: 540px; height: 304px"
-            ></webview>
+            <webview :src="'https://www.youtube.com/embed/' + gameInfo.gameVideoURL" style="width: 540px; height: 304px">
+            </webview>
           </center>
         </div>
         <div class="modal-container description">
@@ -119,22 +96,13 @@
           <h1 class="text-color">{{ $t("requirements") }}</h1>
           <div v-show="gameInfo.gamePlatformWindows">
             <h2 class="text-color">Windows</h2>
-            <img
-              class="platform modal"
-              src="./assets/platformWindows11.png"
-              alt="Windows"
-              v-show="gameInfo.gamePlatformWindows"
-            />
+            <img class="platform modal" src="./assets/platformWindows11.png" alt="Windows"
+              v-show="gameInfo.gamePlatformWindows" />
             <p class="text-color">{{ $t("REQ_WIN") }}</p>
           </div>
           <div v-show="gameInfo.gamePlatformMac">
             <h2 class="text-color">macOS</h2>
-            <img
-              class="platform modal"
-              src="./assets/platformMac.png"
-              alt="macOS"
-              v-show="gameInfo.gamePlatformMac"
-            />
+            <img class="platform modal" src="./assets/platformMac.png" alt="macOS" v-show="gameInfo.gamePlatformMac" />
             <p class="text-color">{{ $t("REQ_MAC") }}</p>
           </div>
         </div>
@@ -220,6 +188,16 @@ export default {
         },
       });
     },
+    async executeDownloadAndExtract(targetPath: string) {
+      const url = process.platform === 'darwin' ? this.gameInfo.gameDownloadMacURL : this.gameInfo.gameDownloadWinURL;
+      try {
+        const response = await ipcRenderer.invoke('downloadAndExtract', { url, targetPath });
+        return response;
+      } catch (error) {
+        console.error('다운로드 및 압축 해제 실행 오류:', error);
+        return false;
+      }
+    }
   },
 };
 </script>
@@ -232,25 +210,30 @@ export default {
   border-radius: 24px;
   box-shadow: 0px 0px 12px #000;
 }
+
 .game-modal {
   width: 100%;
   max-height: 100%;
   overflow-y: auto;
 }
+
 .modal-container {
   background: #485163;
   color: #000;
   border-radius: 24px;
   margin-bottom: 24px;
 }
+
 @media (prefers-color-scheme: dark) {
   .background {
     background: #2c313c;
     color: white;
   }
+
   .text-color {
     color: #fff;
   }
+
   .platform.modal {
     height: 22px;
     filter: contrast(0%) brightness(200%);
@@ -262,9 +245,11 @@ export default {
     background: #5d677e;
     color: white;
   }
+
   .text-color {
     color: #000;
   }
+
   .platform.modal {
     height: 22px;
     filter: contrast(0%) brightness(0%);
